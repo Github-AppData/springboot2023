@@ -13,8 +13,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>  
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
+	integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -43,7 +44,6 @@
 		<div class="offcanvas__option">
 			<div class="offcanvas__links">
 				<a href="#">로그인</a>
-				<a href="#">FAQ</a>
 			</div>
 			<div class="offcanvas__top__hover">
 				<span>KRW <i class="arrow_carrot-down"></i></span>
@@ -79,7 +79,6 @@
                             <div class="header__top__links">
                                 <a th:if="${userID}" th:href="@{/LogoutServlet}" id="sendData">로그아웃</a> <!--th:href="@{sLogout} 로그 아웃 서블릿으로-->
                 				<a th:unless="${userID != null}" th:href="@{sLogin}">로그인</a>
-                                <a href="#">FAQ</a>
                             </div>
                             <div class="header__top__hover">
                             <!-- 임의에 dto 객체를 저렇게 줫는데 user.name이 아닌 user.uid 나 userDTO.name 같이 지정해서 백에서 정해주길
@@ -137,10 +136,10 @@
 
 	<!-- board Section Begin -->
 
-	<section class="notice mt-5" style="text-align: center;">
+	<section class="notice mt-5">
 		<div class="page-title">
 			  <div class="container">
-				  <h3>고객 게시판 - 글쓰기</h3>
+				  <h3 style="text-align: center;">고객 게시판 - 글쓰기</h3>
 			  </div>
 		  </div>
 		  
@@ -152,7 +151,7 @@
 						<input type="text" class="form-control" name="title" placeholder="<제목>을 입력해주세요" style="border-radius:5px; width:100%; padding:5px;" required >
 					</div>
 					<div class="pt-1">
-						<textarea id="summernote" class="form-control" name="content" required></textarea>
+						<textarea id="summernote" class="form-control" name="content" required ></textarea>
 					</div>    
 					<script>
 						$('#summernote').summernote({
