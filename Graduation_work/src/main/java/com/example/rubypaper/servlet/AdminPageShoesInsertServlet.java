@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.rubypaper.dto.Shoes;
+import com.example.rubypaper.dto.Clothes;
 import com.example.rubypaper.service.TotalService;
 
 import jakarta.servlet.ServletException;
@@ -20,7 +20,7 @@ public class AdminPageShoesInsertServlet extends HttpServlet{
 	@Autowired
 	TotalService totalService;
 	
-	Shoes shoes = new Shoes();
+	Clothes shoes = new Clothes();
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,15 +37,15 @@ public class AdminPageShoesInsertServlet extends HttpServlet{
         String [] parts = str.split(",");
         
         
-        String shoes_id = parts[0];
-        String shoes_name = parts[1];
-        int shoes_price = Integer.parseInt(parts[2]);
+        String imgSrc = parts[0];
+        String name = parts[1];
+        int price = Integer.parseInt(parts[2]);
         
-        shoes.setShoes_id(shoes_id);
-        shoes.setShoes_price(shoes_price);
-        shoes.setShoes_name(shoes_name);
+        shoes.setClo_imgSrc(imgSrc);
+        shoes.setPrice(price);
+        shoes.setName(name);
         
-        int final_price = shoes_price;
+        int final_price = price;
         shoes.setFinal_price(final_price);
         
         try {

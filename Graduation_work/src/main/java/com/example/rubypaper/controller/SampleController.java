@@ -256,7 +256,7 @@ public class SampleController {
 		paging.setSearchTag(tag);
 		if(search != null) {
 			try {
-				totalArticle = totalService.searchShoesCount(paging);
+				totalArticle = totalService.searchClothesCount(paging);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -500,7 +500,7 @@ public class SampleController {
 		try {
 			if(search != null) {
 				shoesList = totalService.searchAdminPageShoes(paging);
-				totalArticle = totalService.searchShoesCount(paging);
+				totalArticle = totalService.searchClothesCount(paging);
 			} else {
 				shoesList = totalService.adminPageSelectShoesList(paging);
 				totalArticle = totalService.shoesCount(paging);

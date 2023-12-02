@@ -29,9 +29,9 @@
 	
 	
 
-	<select id="randSelectShoesId" resultType="Map">
-		SELECT shoes_id, shoes_name, final_price, review_stars, sales, shoes_price
-		FROM shoes
+	<select id="TopSelect" resultType="Map">
+		SELECT clo_imgSrc, name, final_price, review_stars, sales, price
+		FROM clothes
 		<choose>
 			<when test="searchTag == 'price_1'">
 				WHERE final_price <![CDATA[<]]> 50000
@@ -51,11 +51,8 @@
 			<when test="searchTag == 'price_5'">
 				WHERE final_price >= 200000
 			</when>
-			<otherwise>
-				
-			</otherwise>
 		</choose>
-		ORDER BY idx ASC		
+		ORDER BY idx ASC
 		LIMIT #{startRow},#{pageSize};
 	</select>
 	
@@ -69,9 +66,9 @@
 	</select>
 
 	<select id="searchsMain" resultType="Map"> 
-		SELECT shoes_id, shoes_name, final_price 
-		FROM shoes
-		WHERE shoes_Name Like CONCAT('%',#{searchWord},'%')
+		SELECT clo_imgSrc, name, final_price, review_stars
+		FROM clothes
+		WHERE name Like CONCAT('%',#{searchWord},'%')
 		<choose>
 			<when test="searchTag == 'price_1'">
 				AND final_price <![CDATA[<]]> 50000
@@ -94,7 +91,8 @@
 			<otherwise>
 				
 			</otherwise>
-		</choose>		
+		</choose>
+		ORDER BY idx ASC
 		LIMIT #{startRow},#{pageSize}; 
 	</select>
 	
@@ -215,11 +213,11 @@
 		</choose>
 	</select>
 
-	<select id="searchShoesCount" resultType="Integer">
+	<select id="searchClothesCount" resultType="Integer">
 		SELECT count(*)
-		FROM shoes
+		FROM clothes
 		where is_delete = 0 and
-		shoes_Name LIKE CONCAT('%',#{searchWord},'%')
+		name LIKE CONCAT('%',#{searchWord},'%')
 		<choose>
 			<when test="searchTag == 'price_1'">
 				AND final_price <![CDATA[<]]> 50000;

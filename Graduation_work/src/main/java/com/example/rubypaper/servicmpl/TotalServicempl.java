@@ -3,7 +3,6 @@ package com.example.rubypaper.servicmpl;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ import com.example.rubypaper.dto.Like_tb;
 import com.example.rubypaper.dto.Order_List;
 import com.example.rubypaper.dto.Paging;
 import com.example.rubypaper.dto.Review;
-import com.example.rubypaper.dto.Shoes;
+import com.example.rubypaper.dto.Clothes;
 import com.example.rubypaper.mapper.TotalMapper;
 import com.example.rubypaper.service.TotalService;
 
@@ -67,8 +66,8 @@ public class TotalServicempl implements TotalService{
 	}
 	
 	@Override
-	public int searchShoesCount(Paging paging) throws Exception{
-		return totalMapper.searchShoesCount(paging);
+	public int searchClothesCount(Paging paging) throws Exception{
+		return totalMapper.searchClothesCount(paging);
 	}
 	
 	@Override
@@ -92,8 +91,8 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public List<Map<String, Object>> randSelectShoesId(Paging paging) throws Exception {
-		return totalMapper.randSelectShoesId(paging);
+	public List<Map<String, Object>> TopSelect(Paging paging) throws Exception {
+		return totalMapper.TopSelect(paging);
 	}
 	
 	@Override
@@ -153,7 +152,7 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public int adminPageUpdateShoesInfo(Shoes shoes) throws Exception {
+	public int adminPageUpdateShoesInfo(Clothes shoes) throws Exception {
 		return totalMapper.adminPageUpdateShoesInfo(shoes);
 	}
 
@@ -163,7 +162,7 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public void adminPageShoesInsert(Shoes shoes) throws Exception {
+	public void adminPageShoesInsert(Clothes shoes) throws Exception {
 		totalMapper.adminPageShoesInsert(shoes);
 	}
 
@@ -178,7 +177,7 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public Shoes shoesIdCheckLike(String shoes_id) throws Exception {
+	public Clothes shoesIdCheckLike(String shoes_id) throws Exception {
 		return totalMapper.shoesIdCheckLike(shoes_id);
 		
 	}
@@ -226,7 +225,7 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public void shoesRatingStarsUpdate(Shoes shoes) throws Exception {
+	public void shoesRatingStarsUpdate(Clothes shoes) throws Exception {
 		totalMapper.shoesRatingStarsUpdate(shoes);
 	}
 

@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import com.example.rubypaper.service.TotalService;
-import com.example.rubypaper.dto.Shoes;
+import com.example.rubypaper.dto.Clothes;
 import com.example.rubypaper.dto.Like_tb;
 
 @WebServlet("/LikePageDataSetServlet")
@@ -22,8 +22,8 @@ public class LikePageDataSetServlet extends HttpServlet{
 	@Autowired
 	TotalService totalService;
 	
-	Shoes shoes = new Shoes();
-	Shoes shoes2 = new Shoes();
+	Clothes shoes = new Clothes();
+	Clothes shoes2 = new Clothes();
 	Like_tb like_tb = new Like_tb();
 	
 	HttpSession session;

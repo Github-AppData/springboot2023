@@ -2,23 +2,16 @@ package com.example.rubypaper.servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.rubypaper.dto.Shoes;
-import com.example.rubypaper.service.CartService;
 import com.example.rubypaper.service.TotalService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nimbusds.oauth2.sdk.http.HTTPRequest;
 
-import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/CartUpdateServlet")
 public class CartUpdateServlet extends HttpServlet {

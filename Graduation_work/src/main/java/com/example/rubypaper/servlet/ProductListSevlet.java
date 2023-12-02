@@ -61,10 +61,9 @@ public class ProductListSevlet extends HttpServlet{
 			if(request.getParameter("search") != null) {
 				shoesList = totalService.searchsMain(paging);
 			}else {
-				shoesList = totalService.randSelectShoesId(paging);
+				shoesList = totalService.TopSelect(paging);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // 데이터 저장.
 		
@@ -74,15 +73,15 @@ public class ProductListSevlet extends HttpServlet{
         System.out.println("shoesList : "+shoesList);
 
         // List<Map<String, Object>>를 JSON으로 변환
-        String shoes_id = objectMapper.writeValueAsString(shoesList);
-        System.out.println("shoes_id : " + shoes_id.toString());
+        String clothes = objectMapper.writeValueAsString(shoesList);
+        System.out.println("clothes : " + clothes.toString());
         
         // JSON 출력
-        System.out.println(shoes_id);
+        System.out.println(clothes);
 
         // Content-Type 설정 (JSON으로 응답)
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().write(shoes_id);
+        response.getWriter().write(clothes);
 	}
 }

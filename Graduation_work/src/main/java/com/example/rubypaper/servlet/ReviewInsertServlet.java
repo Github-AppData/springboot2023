@@ -1,17 +1,12 @@
 package com.example.rubypaper.servlet;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.rubypaper.dto.Review;
-import com.example.rubypaper.dto.Shoes;
+import com.example.rubypaper.dto.Clothes;
 import com.example.rubypaper.service.TotalService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
 public class ReviewInsertServlet extends HttpServlet{
 	
 	Review review = new Review();
-	Shoes shoes = new Shoes();
+	Clothes shoes = new Clothes();
 	int cnt = 0;
 	
 	@Autowired
@@ -57,7 +52,7 @@ public class ReviewInsertServlet extends HttpServlet{
 		    JsonNode jsonNode = objectMapper.readTree(DetailPageInfoGet);
 		
 		    // 첫 번째 요소의 uid 값 가져오기
-		    String shoes_id = jsonNode.get(0).get("uid").asText();
+		    String clo_src = jsonNode.get(0).get("uid").asText();
 		    
 		    // review table의 리뷰 넣기 - review id, shoes_id, rating 
 		    // shoes 테이블의 별점 평균을 넣는데
@@ -71,18 +66,18 @@ public class ReviewInsertServlet extends HttpServlet{
 		    
 		    // review의 기본 정보를 review 테이블의 set 하는 코드 
 		    review.setReview_id(review_id);
-		    review.setShoes_id(shoes_id);
+		    review.setShoes_id(clo_src);
 		    review.setRating(Integer.parseInt(rating));
 		    review.setReviewText(reviewText);
 		    
 		    totalService.reviewInfoInsert(review);
 		    
 		    // review 테이블에서 해당 신발의 rating 평균을 구해서 review_stars 에다가 집어넣는다.
-		    int review_stars = totalService.reviewRatingAvgSelect(shoes_id);
+		    int review_stars = totalService.reviewRatingAvgSelect(clo_src);
 		    
 		    // 계산한 평균 값을 shoes 테이블에 업데이트 하는 코드 
 		    shoes.setReview_stars(review_stars);
-		    shoes.setShoes_id(shoes_id);
+		    shoes.setClo_imgSrc(clo_src);
 
 		    totalService.shoesRatingStarsUpdate(shoes);
 		    
