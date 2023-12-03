@@ -178,14 +178,14 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public Clothes cloSrcCheckLike(String shoes_id) throws Exception {
-		return totalMapper.shoesIdCheckLike(shoes_id);
+	public Clothes cloSrcCheckLike(String clo_imgSrc) throws Exception {
+		return totalMapper.cloSrcCheckLike(clo_imgSrc);
 		
 	}
 
 	@Override
-	public int isLikeUpdate(String shoes_id) throws Exception {
-		return totalMapper.isLikeUpdate(shoes_id);
+	public int isLikeUpdate(String clo_imgSrc) throws Exception {
+		return totalMapper.isLikeUpdate(clo_imgSrc);
 		
 	}
 
@@ -206,13 +206,13 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public int likeDeleteShoesId(String shoes_id) throws Exception {
-		return totalMapper.likeDeleteShoesId(shoes_id);
+	public int likeDeleteCloSrc(String clo_imgSrc) throws Exception {
+		return totalMapper.likeDeleteCloSrc(clo_imgSrc);
 	}
 
 	@Override
-	public int isDisableLikeUpdate(String shoes_id) throws Exception {
-		return totalMapper.isDisableLikeUpdate(shoes_id);
+	public int isDisableLikeUpdate(String clo_imgSrc) throws Exception {
+		return totalMapper.isDisableLikeUpdate(clo_imgSrc);
 	}
 
 	@Override

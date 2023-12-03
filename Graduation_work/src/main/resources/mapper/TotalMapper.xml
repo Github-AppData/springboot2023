@@ -160,33 +160,31 @@
 	</select>
 	
 	<update id="isLikeUpdate">
-		update shoes
+		update clothes
 		set is_like = 1
-		where shoes_id = #{shoes_id};
+		where clo_imgSrc = #{clo_imgSrc};
 	</update>
 
 	<update id="isDisableLikeUpdate">
-		update shoes
+		update clothes
 		set is_like = 0
-		where shoes_id = #{shoes_id};
+		where clo_imgSrc = #{clo_imgSrc};
 	</update>
 
 	<select id="isLikeSelect">
-		select shoes.shoes_name, shoes.final_price, like_tb.shoes_id
-		from shoes, like_tb
-		where shoes.shoes_id = like_tb.shoes_id and shoes.is_like = 1
+		select name, price, clo_imgSrc
+		from like_tb
 		LIMIT #{startRow},#{pageSize};
 	</select>
 
 	<select id="isLikeCount" resultType="Integer">
 		select count(*)
-		from shoes, like_tb
-		where shoes.shoes_id = like_tb.shoes_id and shoes.is_like = 1;
+		from like_tb;
 	</select>
 
-	<delete id="likeDeleteShoesId">
+	<delete id="likeDeleteCloSrc">
 		delete from like_tb
-		where shoes_id = #{shoes_id}
+		where clo_imgSrc = #{clo_imgSrc}
 	</delete>
 
 	<select id="linkIdSelectLike">
@@ -194,10 +192,14 @@
 		from like_tb;
 	</select>
 
+
+
 	<insert id="isLikeInfoInsert">
-		insert into like_tb(shoes_id, link_id, shoes_name, user_id)
-		values (#{shoes_id}, #{link_id}, #{shoes_name}, #{user_id})
+		insert into like_tb(like_id, clo_imgSrc, link_id, name, price, user_id)
+		SELECT COALESCE(MAX(like_id) + 1, 1), #{clo_imgSrc}, #{link_id}, #{name}, #{price}, #{user_id}
+		FROM like_tb;
 	</insert>
+
 
 
 	<select id="cloSrcCheckLike">

@@ -22,7 +22,7 @@ public class LikePageDataSetServlet extends HttpServlet{
 	@Autowired
 	TotalService totalService;
 	
-	Clothes shoes = new Clothes();
+	Clothes clothes = new Clothes();
 	Clothes shoes2 = new Clothes();
 	Like_tb like_tb = new Like_tb();
 	
@@ -54,14 +54,14 @@ public class LikePageDataSetServlet extends HttpServlet{
         
         String [] parts = str.split(",");
         
-        String imgSrc = parts[0];
+        String clo_imgSrc = parts[0];
         String name = parts[1];
-        int final_price = Integer.parseInt(parts[2]);
+        int price = Integer.parseInt(parts[2]);
         int link_id = Integer.parseInt(parts[3]);
         
         try {
         	// 좋아요 테이블 같은 신발이 있는가 ?
-			shoes = totalService.(imgSrc);
+			clothes = totalService.cloSrcCheckLike(clo_imgSrc);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,16 +72,16 @@ public class LikePageDataSetServlet extends HttpServlet{
         if(userID != null)
         {
         	// 같은 신발이 없을 때,
-        	if(shoes == null)
+        	if(clothes == null)
         	{
-        		// 좋아요 DB에 shoes_id가 없을 경우 
+        		// 좋아요 DB에 clo_imgSrc가 없을 경우
     	        try {
+					like_tb.setClo_imgSrc(clo_imgSrc);
     	        	like_tb.setLink_id(link_id);
-    	        	like_tb.setClo_imgSrc(imgSrc);
     	        	like_tb.setName(name);
-					like_tb.setPrice(final_price);
+					like_tb.setPrice(price);
     	        	like_tb.setUser_id(userID);
-    	        	totalService.isLikeUpdate(imgSrc);
+    	        	totalService.isLikeUpdate(clo_imgSrc);
     				totalService.isLikeInfoInsert(like_tb);
     				
     				System.out.println("신발 등록 완료");
@@ -93,13 +93,13 @@ public class LikePageDataSetServlet extends HttpServlet{
     				e.printStackTrace();
     			}
     	        
-        	 } else {
+			} else {
         		// 좋아요 DB에 shoes_id가 있는 경우
         		// - 좋아요 테이블에서 삭제 하는 거를 해야된다.
             	try {
             		// 신발 테이블에 is_Like 값 업데이트 
-            		totalService.isDisableLikeUpdate(imgSrc);
-    				totalService.likeDeleteShoesId(imgSrc);
+            		totalService.isDisableLikeUpdate(clo_imgSrc);
+    				totalService.likeDeleteCloSrc(clo_imgSrc);
     				
     				// 좋아요 DB에 shoes_id가 있는 경우
     				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401

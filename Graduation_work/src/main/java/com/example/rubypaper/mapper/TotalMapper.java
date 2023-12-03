@@ -43,13 +43,13 @@ public interface TotalMapper {
 	public void adminPageShoesInsert(Clothes shoes) throws Exception;
 	public List<Map<String, Object>> adminPageSelectAdminAccount() throws Exception;
 	public void isLikeInfoInsert(Like_tb like_tb) throws Exception;
-	public Clothes shoesIdCheckLike(@Param("shoes_id") String shoes_id) throws Exception;
-	public int isLikeUpdate(@Param("shoes_id") String shoes_id) throws Exception;
+	public Clothes cloSrcCheckLike(@Param("clo_imgSrc") String clo_imgSrc) throws Exception;
+	public int isLikeUpdate(@Param("clo_imgSrc") String clo_imgSrc) throws Exception;
 	public List<Map<String, Object>> linkIdSelectLike() throws Exception;
 	public List<Map<String, Object>> isLikeSelect(Paging paging) throws Exception;
 	public int isLikeCount() throws Exception;
-	public int likeDeleteShoesId(String shoes_id) throws Exception;
-	public int isDisableLikeUpdate(String shoes_id) throws Exception;
+	public int likeDeleteCloSrc(String clo_imgSrc) throws Exception;
+	public int isDisableLikeUpdate(String clo_imgSrc) throws Exception;
 	public void reviewInfoInsert(Review review) throws Exception;
 	public int reviewRatingAvgSelect(String shoes_id) throws Exception;
 	public void shoesRatingStarsUpdate(Clothes shoes) throws Exception;

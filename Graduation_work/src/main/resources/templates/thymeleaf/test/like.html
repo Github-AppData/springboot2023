@@ -173,7 +173,7 @@
 						<div class="col-lg-4 col-md-6 col-sm-6" id="div0">
 							<div class="product__item sale">
 								<div class="product__item__pic set-bg">
-									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="api-frame-1" width="360" height="260" style="border:none"
+									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="img0" width="260" height="260" style="border:none"
 										class="d-inline-block align-text-top">
 									</img>
 								</div>
@@ -205,7 +205,7 @@
 						<div class="col-lg-4 col-md-6 col-sm-6" id="div1">
 							<div class="product__item sale">
 								<div class="product__item__pic set-bg">
-									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="api-frame-2" width="360" height="260" style="border:none"
+									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="img1" width="260" height="260" style="border:none"
 										class="d-inline-block align-text-top">
 									</img>
 								</div>
@@ -234,7 +234,7 @@
 						<div class="col-lg-4 col-md-6 col-sm-6" id="div2">
 							<div class="product__item sale">
 								<div class="product__item__pic set-bg">
-									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="api-frame-3" width="360" height="260" style="border:none"
+									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="img2" width="260" height="260" style="border:none"
 										class="d-inline-block align-text-top">
 									</img>
 								</div>
@@ -263,7 +263,7 @@
 						<div class="col-lg-4 col-md-6 col-sm-6" id="div3">
 							<div class="product__item sale">
 								<div class="product__item__pic set-bg">
-									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="api-frame-4" width="360" height="260" style="border:none"
+									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="img3" width="260" height="260" style="border:none"
 										class="d-inline-block align-text-top">
 									</img>
 								</div>
@@ -294,7 +294,7 @@
 						<div class="col-lg-4 col-md-6 col-sm-6" id="div4">
 							<div class="product__item sale">
 								<div class="product__item__pic set-bg">
-									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="api-frame-5" width="360" height="260" style="border:none"
+									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="img4" width="260" height="260" style="border:none"
 										class="d-inline-block align-text-top">
 									</img>
 								</div>
@@ -323,7 +323,7 @@
 						<div class="col-lg-4 col-md-6 col-sm-6" id="div5">
 							<div class="product__item sale">
 								<div class="product__item__pic set-bg">
-									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="api-frame-6" width="360" height="260" style="border:none"
+									<img src="https://dummyimage.com/360x260/dee2e6/6c757d.jpg" id="img5" width="260" height="260" style="border:none"
 										class="d-inline-block align-text-top">
 									</img>
 								</div>
@@ -439,7 +439,7 @@
 
 		// 전역변수 공간 입니다만.
 
-		var imageToModelMapping_real = [];
+		var cloinfo_Array = [];
 		var iframe_clicked = [];
 		var shoes_selected = ["shoes1_page", "shoes2_page", "shoes3_page", "shoes4_page", "shoes5_page", "shoes6_page"];
 
@@ -479,6 +479,7 @@
 				// 응답이 되었으면,
 				if (xhr.readyState === 4 && xhr.status === 200) {
 					object = JSON.parse(xhr.responseText);
+					console.log("object : ", object);
 					objLength = Object.keys(object).length;
 					console.log("objLength : ", objLength);
 					
@@ -494,8 +495,8 @@
 					}
 					//필요한 것만 불러오도록 변경
 					for(var i = 0; i < objLength; i++){
-						imageToModelMapping_real.push({uid: object[i].shoes_id, iframeId: 'api-frame-' + (i + 1), shoes_name: object[i].shoes_name, final_price: object[i].final_price});
-						console.log("imageToModelMapping_real : ", imageToModelMapping_real[i]);
+						cloinfo_Array.push({clo_imgSrc: object[i].clo_imgSrc, name: object[i].name, price: object[i].price});
+						console.log("cloinfo_Array : ", cloinfo_Array[i]);
 					}
 					
 					var real = objLength;
@@ -518,17 +519,20 @@
 					var total_cost = 0; // 총 금액 (상품 총 금액 + 배송비)
 					
 					for (var i = 0; i < objLength; i++) {
-						var shoes_info_name = imageToModelMapping_real[i].shoes_name;
-						var shoes_info_price = imageToModelMapping_real[i].final_price;
-						var format_price_real = numeral(shoes_info_price).format('0,0');
-						price_sum += shoes_info_price;						
-						document.getElementById(article_id[i]).innerHTML = "<h4>" + shoes_info_name + "</h4>";
+						var clo_info_name = cloinfo_Array[i].name;
+						var clo_info_price = cloinfo_Array[i].price;
+						var format_price_real = numeral(clo_info_price).format('0,0');
+						price_sum += clo_info_price;						
+						document.getElementById(article_id[i]).innerHTML = "<h4>" + clo_info_name + "</h4>";
 						document.getElementById(article_price_id[i]).innerHTML = "<h5>" + format_price_real + "원 </h5>";
-						
+
+						var idname = "img"+i;
+						document.getElementById(idname).src = cloinfo_Array[i].clo_imgSrc;
+
 						//document.getElementById(item_[num]).innerHTML = '';
 					}
 					
-					imageToModelMapping_real.forEach(function (mapping) {
+					cloinfo_Array.forEach(function (mapping) {
 						replaceWith3DModel(mapping.uid, mapping.iframeId);
 					});
 
@@ -622,14 +626,14 @@
 			var likeData = [];
 			var likeSendData = [];
 			
-			var shoes_id = imageToModelMapping_real[linkId].uid;
-			var shoes_name = imageToModelMapping_real[linkId].shoes_name;
-			var shoes_price = imageToModelMapping_real[linkId].final_price;
+			var clo_imgSrc = cloinfo_Array[linkId].clo_imgSrc;
+			var name = cloinfo_Array[linkId].name;
+			var price = cloinfo_Array[linkId].price;
 			var currentvalue;
 						
-			likeData.push(shoes_id);
-			likeData.push(shoes_name);
-			likeData.push(shoes_price);
+			likeData.push(clo_imgSrc);
+			likeData.push(name);
+			likeData.push(price);
 			likeData.push(linkId);
 			
 			currentvalue = document.getElementById(whoLikeButton).value;
@@ -678,37 +682,37 @@
 
 				case "1":
 					var num = 0 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
+					dataToSend = cloinfo_Array[num];
 					console.log(dataToSend);
 					break;
 
 				case "2":
 					var num = 1 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
+					dataToSend = cloinfo_Array[num];
 					console.log(dataToSend);
 					break;
 
 				case "3":
 					var num = 2 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
+					dataToSend = cloinfo_Array[num];
 					console.log(dataToSend);
 					break;
 
 				case "4":
 					var num = 3 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
+					dataToSend = cloinfo_Array[num];
 					console.log(dataToSend);
 					break;
 
 				case "5":
 					var num = 4 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
+					dataToSend = cloinfo_Array[num];
 					console.log(dataToSend);
 					break;
 
 				case "6":
 					var num = 5 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
+					dataToSend = cloinfo_Array[num];
 					console.log(dataToSend);
 					break;
 

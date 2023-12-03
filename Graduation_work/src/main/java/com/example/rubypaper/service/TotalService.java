@@ -43,14 +43,14 @@ public interface TotalService {
 	public void adminPageDeleteShoesInfo(@Param("shoes_name") String shoes_name) throws Exception;
 	public void adminPageShoesInsert(Clothes shoes) throws Exception;
 	public List<Map<String, Object>> adminPageSelectAdminAccount() throws Exception;
-	public Clothes shoesIdCheckLike (@Param("shoes_id") String shoes_id) throws Exception;
-	public int isLikeUpdate(@Param("shoes_id") String shoes_id) throws Exception;
+	public Clothes cloSrcCheckLike (@Param("clo_imgSrc") String clo_imgSrc) throws Exception;
+	public int isLikeUpdate(@Param("clo_imgSrc") String clo_imgSrc) throws Exception;
 	public void isLikeInfoInsert(Like_tb like_tb) throws Exception;
-	public int isDisableLikeUpdate(@Param("shoes_id") String shoes_id) throws Exception;
+	public int isDisableLikeUpdate(@Param("clo_imgSrc") String clo_imgSrc) throws Exception;
 	public List<Map<String, Object>> isLikeSelect(Paging paging) throws Exception;
 	public int isLikeCount() throws Exception;
 	public List<Map<String, Object>> linkIdSelectLike() throws Exception;	
-	public int likeDeleteShoesId(@Param("shoes_id") String shoes_id) throws Exception;
+	public int likeDeleteCloSrc(@Param("clo_imgSrc") String clo_imgSrc) throws Exception;
 	public List<Map<String, Object>> selectMain() throws Exception;
 	public void reviewInfoInsert(Review review) throws Exception;
 	
