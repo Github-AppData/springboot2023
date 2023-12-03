@@ -56,8 +56,8 @@ public class RequestPayServlet extends HttpServlet{
         String [] parts = str.split(",");
         
         int size = Integer.parseInt(parts[0]);
-        String shoes_name = parts[1];
-        String shoes_id = parts[2];
+        String name = parts[1];
+        String imgSrc = parts[2];
         int quantity = Integer.parseInt(parts[3]);
         int price = Integer.parseInt(parts[4]);
         String way = parts[5];
@@ -69,9 +69,9 @@ public class RequestPayServlet extends HttpServlet{
         order_List.setUser_id(userID);
         order_List.setPrice(price);
         order_List.setQuantity(quantity);
-        order_List.setShoes_name(shoes_name);
+        order_List.setName(name);
         order_List.setWay(way);
-        order_List.setShoes_id(shoes_id);
+        order_List.setClo_imgSrc(imgSrc);
         
         try {
 			totalService.requestPay2InfoInsert(order_List);

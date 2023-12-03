@@ -4,7 +4,7 @@
     function requestPay(){
                 //class가 btn_payment인 태그를 선택했을 때 작동한다.       
                   var shoesPriceElement = document.getElementById("total_cost");
-                  var shoes_name = document.getElementById("shoes_name").textContent;
+                  var shoes_name = document.getElementById("name").textContent;
                   var shoesPrice = parseFloat(shoesPriceElement.textContent.replace("원", "").replace(",", ""));
                   console.log(shoes_name);
                     //결제시 전달되는 정보

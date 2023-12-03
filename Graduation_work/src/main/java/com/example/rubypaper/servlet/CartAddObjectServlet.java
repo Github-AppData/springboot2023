@@ -54,13 +54,13 @@ public class CartAddObjectServlet extends HttpServlet{
         
         String [] parts = str.split(",");
         
-        String shoes_id = parts[0];
-        String shoes_name = parts[1];
+        String clo_imgSrc = parts[0];
+        String name = parts[1];
         int final_price = Integer.parseInt(parts[2]);
         int quantity = Integer.parseInt(parts[3]);
-        int size = Integer.parseInt(parts[4]);
+        String size = parts[4];
         
-        System.out.println(shoes_id);
+        System.out.println(clo_imgSrc);
         System.out.println(checkLogin);
 		
 		if(checkLogin != null) {
@@ -73,14 +73,14 @@ public class CartAddObjectServlet extends HttpServlet{
 		 
 		    try {
 		    	// 신발 아이디가 검색된 게 없다면, 
-				if(cartService.cartCheckShoesId(shoes_id) == null)
+				if(cartService.cartCheckimgSrc(clo_imgSrc) == null)
 				{
 					
 					cart.setQuantity(quantity);
 				    cart.setSize(size);
-				    cart.setShoes_name(shoes_name);
-				    cart.setShoes_id(shoes_id);
-				    cart.setShoes_price(final_price);
+				    cart.setName(name);
+				    cart.setClo_imgSrc(clo_imgSrc);
+				    cart.setPrice(final_price);
 				    cart.setUser_id(checkLogin);
 					cartService.cartInsert(cart);
 					

@@ -224,11 +224,12 @@
 											</div>
 										</div>
 									</div>
-									<button type="button" onclick="tagReset()">초기화</button>
+									<button type="button" class="btn btn-dark btn-block float-right text-white" onclick="tagReset()">초기화</button>
 								</div>
 							</div><br>
 							<button type="button" class="btn btn-dark btn-block float-right text-white"
-								onclick="radioTest()" style="background-image: url(img/bg2.png)">검색</button>
+								onclick="radioTest()">검색</button>
+
 						</div>
 					</div>
 				</div>
@@ -519,7 +520,8 @@
 
 		// 전역변수 공간 입니다만.
 
-		var imageToModelMapping_real = [];
+		var clothes_Array = [];
+		var clothesBottom_Array = [];
 		var iframe_clicked = [];
 		var shoes_selected = ["shoes1_page", "shoes2_page", "shoes3_page", "shoes4_page", "shoes5_page", "shoes6_page"];
 		var clothes_imgIdAry = ["clo_imgId_0", "clo_imgId_1", "clo_imgId_2", "clo_imgId_3","clo_imgId_4", "clo_imgId_5"];
@@ -528,44 +530,52 @@
 		var shoes1_name;
 		var shoes_price;
 
+
+
 		var page = 1;
 		var pageLength;
 
 		var object = null;
+		var objectBottom = null;
 		var objLength = null;
 
 		var dataToSend = null;
 		
 		var paging = [[${paging}]];
+		var pagingbottom = [[${paging_bottom}]];
 		var radioval;
 
-		var xhr = new XMLHttpRequest();
+		var xhr = new XMLHttpRequest(); // pageLoad
 		var xhr2 = new XMLHttpRequest();
 		var xhr3 = new XMLHttpRequest();
-		var xhr4 = new XMLHttpRequest(); // 좋아요 버튼 load시 state config
+		var xhr4 = new XMLHttpRequest(); // bottomPageLoad
 		
 		//현재 url
 		const url = new URL(location.href);
 		//현재 url에서 ?뒤쪽에 있는 것들을 받아옴 localhost:8023/noticd?search=123&page=2라면 ?search=123&page=2이 값을 가져옴
 		const urlParams = url.searchParams;
 
-
 		window.onload = pageLoad;
 		function pageLoad() {
 
+			status = null;
+			status = "상의";
+			console.log("status : ", status);
 			xhr.onreadystatechange = function () {
 				// 응답이 되었으면,
 				console.log("xhr.readyState : ", xhr.readyState);
 				console.log("xhr.status : ", xhr.status);
+
 				if (xhr.readyState === 4 && xhr.status === 200) {
 					object = JSON.parse(xhr.responseText);
+					console.log("object : ", object);
 					objLength = Object.keys(object).length;
 					console.log("objLength : ", objLength);
 
 
 					
-					var numberOfTotalStars = 5; // 전체 별의 수
-					var numberOfOrangeStars = [];
+					numberOfTotalStars = 5; // 전체 별의 수
+					numberOfOrangeStars = [];
 					
 					var real = objLength;
 					for(var i = real; i < 6; i++)
@@ -597,6 +607,9 @@
 					}
 					//필요한 것만 불러오도록 변경
 					for(var i = 0; i < objLength; i++){
+
+						// clothes_Array 셋팅
+						clothes_Array.push({name: object[i].name, final_price: object[i].final_price, clo_imgSrc: object[i].clo_imgSrc, review_stars: object[i].review_stars})
 
 						var imgId = clothes_imgIdAry[i];
 						document.getElementById(imgId).src = object[i].clo_imgSrc;
@@ -728,7 +741,8 @@
 		    location.href="sLogin";
 		  }, 2000); // 3초 후 메시지가 사라집니다.
 		}
-		
+
+		// like fuc
 		function onoff(element){
 			var linkId = 0;
 
@@ -736,23 +750,27 @@
 			console.log("linkId : ", linkId);
 			
 			var whoLikeButton = 'onoff' + linkId;
-			
 			var mybtnstylechange = document.getElementById(whoLikeButton);
-			
-			
-			
+
 			var likeData = [];
 			var likeSendData = [];
-			
-			var shoes_id = imageToModelMapping_real[linkId].uid;
-			var shoes_name = imageToModelMapping_real[linkId].shoes_name;
-			var shoes_price = imageToModelMapping_real[linkId].final_price;
+
+			var imgSrc = null;
+			var name = null;
+			var price = null;
+
+			imgSrc = clothes_Array[linkId].clo_imgSrc;
+			name = clothes_Array[linkId].name;
+			price = clothes_Array[linkId].final_price;
+
 			var currentvalue;
 						
-			likeData.push(shoes_id);
-			likeData.push(shoes_name);
-			likeData.push(shoes_price);
+			likeData.push(imgSrc);
+			likeData.push(name);
+			likeData.push(price);
 			likeData.push(linkId);
+
+			console.log("likeData : ", likeData);
 			
 			currentvalue = document.getElementById(whoLikeButton).value;
 			console.log("currentvalue : "+linkId,currentvalue);
@@ -797,50 +815,55 @@
 		function handleLinkClick(link) {
 			var linkId = null;
 			var jsonData = null;
+			var num;
+
 
 			linkId = link.getAttribute("data-link-id");
 
-			switch (linkId) {
+			console.log("status : ", status);
 
-				case "1":
-					var num = 0 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
-					console.log(dataToSend);
-					break;
+				// 상의 일 경우
+				switch (linkId) {
 
-				case "2":
-					var num = 1 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
-					console.log(dataToSend);
-					break;
+					case "1":
+						num = 0 + page * 6 - 6;
+						dataToSend = clothes_Array[num];
+						console.log(dataToSend);
+						break;
 
-				case "3":
-					var num = 2 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
-					console.log(dataToSend);
-					break;
+					case "2":
+						num = 1 + page * 6 - 6;
+						dataToSend = clothes_Array[num];
+						console.log(dataToSend);
+						break;
 
-				case "4":
-					var num = 3 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
-					console.log(dataToSend);
-					break;
+					case "3":
+						num = 2 + page * 6 - 6;
+						dataToSend = clothes_Array[num];
+						console.log(dataToSend);
+						break;
 
-				case "5":
-					var num = 4 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
-					console.log(dataToSend);
-					break;
+					case "4":
+						num = 3 + page * 6 - 6;
+						dataToSend = clothes_Array[num];
+						console.log(dataToSend);
+						break;
 
-				case "6":
-					var num = 5 + page * 6 - 6;
-					dataToSend = imageToModelMapping_real[num];
-					console.log(dataToSend);
-					break;
+					case "5":
+						num = 4 + page * 6 - 6;
+						dataToSend = clothes_Array[num];
+						console.log(dataToSend);
+						break;
 
-				default:
-					console.log("아무것도 눌리지 않았습니다.");
-			}
+					case "6":
+						num = 5 + page * 6 - 6;
+						dataToSend = clothes_Array[num];
+						console.log(dataToSend);
+						break;
+
+					default:
+						console.log("아무것도 눌리지 않았습니다.");
+				}
 
 
 
@@ -848,6 +871,7 @@
 				console.log("dataToSend NOT NULL");
 
 				jsonData = JSON.stringify(dataToSend);
+				console.log(jsonData);
 
 			} else {
 				console.log("dataToSend NULL");

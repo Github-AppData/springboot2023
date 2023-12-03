@@ -3,20 +3,15 @@ package com.example.rubypaper.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.example.rubypaper.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import com.example.rubypaper.dto.Paging;
-import com.example.rubypaper.dto.Review;
-import com.example.rubypaper.dto.Clothes;
-import com.example.rubypaper.dto.Like_tb;
-import com.example.rubypaper.dto.Order_List;
 
 @Mapper
 public interface TotalMapper {
 
 	public int getBoardValue();
-	public List<Map<String, Object>> TopSelect(Paging paging);
+	public List<Map<String, Object>> TopSelect(Paging paging) throws Exception;
 	public List<Map<String, Object>> searchsMain(Paging paging);
 	public List<Map<String, Object>> findIsLike();
 	public List<Map<String, Object>> boardCheckIdFindList(@Param("user_id") String user_id);
@@ -39,7 +34,7 @@ public interface TotalMapper {
 	public int searchUserCount(String name) throws Exception;
 	public List<Map<String, Object>> cartFindList();
 	public void FindListIsDelete() throws Exception;
-	public int cartUpdateIsDelete(@Param("shoes_id") String shoes_id) throws Exception;
+	public int cartUpdateIsDelete(@Param("clo_imgSrc") String clo_imgSrc) throws Exception;
 	public String cartFindShoesId(@Param("shoes_id") String shoes_id) throws Exception;
 	public int noticeBoardIdxResort() throws Exception;
 	public List<Map<String, Object>> adminPageSelectUserList(Paging paging) throws Exception;
@@ -63,4 +58,9 @@ public interface TotalMapper {
 	public void requestPay2InfoInsert(Order_List order_List) throws Exception;
 	public List<Map<String, Object>> myPageOrderListSelect(@Param("user_id") String user_id) throws Exception;
 	public List<Map<String, Object>> myPageToSDetailsSetSelect(@Param("order_id") int order_id) throws Exception;
+
+	List<Map<String, Object>> BottomSelect(Paging_bottom paging_bottom) throws Exception;
+
+	List<Map<String, Object>> searchsMainBottom(Paging_bottom paging_bottom) throws Exception;
+
 }

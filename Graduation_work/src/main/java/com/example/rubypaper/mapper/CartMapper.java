@@ -9,7 +9,7 @@ import com.example.rubypaper.dto.Cart;
 @Mapper
 public interface CartMapper {
 	
-	public void cartInsert(Cart car);
-	public String cartCheckShoesId(@Param("shoes_id") String shoes_id);
+	public void cartInsert(Cart cart);
+	public String cartCheckimgSrc(@Param("clo_imgSrc") String clo_imgSrc);
 	public int numberOfCart();
 }

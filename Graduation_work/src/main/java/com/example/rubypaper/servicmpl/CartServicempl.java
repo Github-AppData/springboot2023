@@ -19,8 +19,8 @@ public class CartServicempl implements CartService{
 	}
 
 	@Override
-	public String cartCheckShoesId(String shoes_id) throws Exception {
-		return cartMapper.cartCheckShoesId(shoes_id);
+	public String cartCheckimgSrc(String clo_imgSrc) throws Exception {
+		return cartMapper.cartCheckimgSrc(clo_imgSrc);
 	}
 
 	@Override

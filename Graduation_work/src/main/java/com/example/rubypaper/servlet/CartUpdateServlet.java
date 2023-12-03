@@ -19,9 +19,6 @@ public class CartUpdateServlet extends HttpServlet {
 	@Autowired
 	TotalService totalService;
 	
-	
-	
-	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -45,14 +42,13 @@ public class CartUpdateServlet extends HttpServlet {
         
         parts = str.split(",");
         
-        String shoes_id = null;
-        shoes_id = parts[0];
-        
-        
-        System.out.println("shoes_id : "+shoes_id);
+        String clo_imgSrc = null;
+		clo_imgSrc = parts[0];
+
+        System.out.println("clo_imgSrc : "+clo_imgSrc);
         
         try {
-			totalService.cartUpdateIsDelete(shoes_id);
+			totalService.cartUpdateIsDelete(clo_imgSrc);
 			
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {

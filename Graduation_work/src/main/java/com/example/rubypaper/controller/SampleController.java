@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.rubypaper.dto.Paging_bottom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -246,14 +247,23 @@ public class SampleController {
 			Model model,HttpServletRequest request, HttpSession session)
 	{
 		Paging paging = new Paging();
+		Paging_bottom paging_bottom = new Paging_bottom();
 		int totalArticle = 0;
 		
 		System.out.println(search);
-		
+
+		// 페이징 하의
+		paging_bottom.setPage(page);
+		paging_bottom.setPageSize(6);
+		paging_bottom.setSearchWord(search);
+		paging_bottom.setSearchTag(tag);
+
+		// 페이징 상의
 		paging.setPage(page);
 		paging.setPageSize(6);
 		paging.setSearchWord(search);
 		paging.setSearchTag(tag);
+
 		if(search != null) {
 			try {
 				totalArticle = totalService.searchClothesCount(paging);
@@ -271,16 +281,25 @@ public class SampleController {
 		}
 		paging.setTotalArticle(totalArticle);
 		paging.setTotalPage(totalArticle);
+
+		paging_bottom.setTotalArticle(totalArticle);
+		paging_bottom.setTotalPage(totalArticle);
 		
 		var startRow = paging.getPageSize() * (page - 1);
+		var startRowbottom = paging_bottom.getPageSize() * (page - 1);
+
 		paging.setStartRow(startRow);
 		paging.setEndRow();
-		
+
+		paging_bottom.setStartRow(startRowbottom);
+		paging_bottom.setEndRow();
+
 		// user_id 구하는 것.
 		session = request.getSession();
 		String userID = (String) session.getAttribute("userID"); // 로그인 아이디가 checkLogin에 들어가 있다.
 								
 		model.addAttribute("paging", paging); // paging객체 전달
+		model.addAttribute("paging_bottom", paging_bottom); // paging객체 전달
 		model.addAttribute("userID", userID); // userID를 전한다.
 		System.out.println("userID : " + userID);
 		

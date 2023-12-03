@@ -3,13 +3,8 @@ package com.example.rubypaper.service;
 import java.util.List;
 import java.util.Map;
 
+import com.example.rubypaper.dto.*;
 import org.apache.ibatis.annotations.Param;
-
-import com.example.rubypaper.dto.Like_tb;
-import com.example.rubypaper.dto.Order_List;
-import com.example.rubypaper.dto.Paging;
-import com.example.rubypaper.dto.Review;
-import com.example.rubypaper.dto.Clothes;
 
 
 public interface TotalService {
@@ -32,14 +27,17 @@ public interface TotalService {
 	public List<Map<String, Object>> cartFindList() throws Exception;
 	public List<Map<String, Object>> findIsLike() throws Exception;
 	public List<Map<String, Object>> TopSelect(Paging paging) throws Exception;
+	public List<Map<String, Object>> BottomSelect(Paging_bottom paging_bottom) throws Exception;
 	public List<Map<String, Object>> searchsMain(Paging paging) throws Exception;
+	public List<Map<String, Object>> searchsMainBottom(Paging_bottom paging_bottom) throws Exception;
+
 	public List<Map<String, Object>> searchAdminPageShoes(Paging paging) throws Exception;
 	public List<Map<String, Object>> searchAdminPageUser(Paging paging) throws Exception;
 	public void FindListIsDelete() throws Exception;
 	public int getBoardValue() throws Exception;
 	public int noticeBoardIdxResort() throws Exception;
 	public List<Map<String, Object>> adminPageSelectUserList(Paging paging) throws Exception;
-	public int cartUpdateIsDelete(@Param("shoes_id") String shoes_id) throws Exception;
+	public int cartUpdateIsDelete(@Param("clo_imgSrc") String clo_imgSrc) throws Exception;
 	public String cartFindShoesId(String shoes_id) throws Exception;
 	public List<Map<String, Object>> adminPageSelectShoesList(Paging paging) throws Exception;
 	public void adminPageDeleteShoesInfo(@Param("shoes_name") String shoes_name) throws Exception;

@@ -4,58 +4,88 @@ public class Cart {
 
 	private int cart_id;
 	private String user_id;
-	private String shoes_id;
-	private String shoes_name;
-	private int shoes_price;
+	private String clo_imgSrc;
+	private String name;
+	private int price;
 	private int quantity;
-	private int size;
+	private String size;
+	private int is_delete;
+
 	public int getCart_id() {
 		return cart_id;
 	}
+
 	public void setCart_id(int cart_id) {
 		this.cart_id = cart_id;
 	}
+
 	public String getUser_id() {
 		return user_id;
 	}
+
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public String getShoes_id() {
-		return shoes_id;
+
+	public String getClo_imgSrc() {
+		return clo_imgSrc;
 	}
-	public void setShoes_id(String shoes_id) {
-		this.shoes_id = shoes_id;
+
+	public void setClo_imgSrc(String clo_imgSrc) {
+		this.clo_imgSrc = clo_imgSrc;
 	}
-	public String getShoes_name() {
-		return shoes_name;
+
+	public String getName() {
+		return name;
 	}
-	public void setShoes_name(String shoes_name) {
-		this.shoes_name = shoes_name;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public int getShoes_price() {
-		return shoes_price;
+
+	public int getPrice() {
+		return price;
 	}
-	public void setShoes_price(int shoes_price) {
-		this.shoes_price = shoes_price;
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
+
 	public int getQuantity() {
 		return quantity;
 	}
+
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getSize() {
+
+	public String getSize() {
 		return size;
 	}
-	public void setSize(int size) {
+
+	public void setSize(String size) {
 		this.size = size;
 	}
+
+	public int getIs_delete() {
+		return is_delete;
+	}
+
+	public void setIs_delete(int is_delete) {
+		this.is_delete = is_delete;
+	}
+
 	@Override
 	public String toString() {
-		return "Cart [cart_id=" + cart_id + ", user_id=" + user_id + ", shoes_id=" + shoes_id + ", shoes_name="
-				+ shoes_name + ", shoes_price=" + shoes_price + ", quantity=" + quantity + ", size=" + size + "]";
+		return "Cart{" +
+				"cart_id=" + cart_id +
+				", user_id='" + user_id + '\'' +
+				", clo_imgSrc='" + clo_imgSrc + '\'' +
+				", name='" + name + '\'' +
+				", price=" + price +
+				", quantity=" + quantity +
+				", size='" + size + '\'' +
+				", is_delete=" + is_delete +
+				'}';
 	}
-	
-	
 }

@@ -28,7 +28,7 @@
 	
 	
 	
-
+	<!-- 상의 -->
 	<select id="TopSelect" resultType="Map">
 		SELECT clo_imgSrc, name, final_price, review_stars, sales, price
 		FROM clothes
@@ -55,7 +55,64 @@
 		ORDER BY idx ASC
 		LIMIT #{startRow},#{pageSize};
 	</select>
-	
+
+	<select id="BottomSelect" resultType="Map">
+		SELECT clo_imgSrc, name, final_price, review_stars, sales, price
+		FROM clothes_bottom
+		<choose>
+			<when test="searchTag == 'price_1'">
+				WHERE final_price <![CDATA[<]]> 50000
+			</when>
+			<when test="searchTag == 'price_2'">
+				WHERE final_price >= 50000
+				AND final_price <![CDATA[<]]> 100000
+			</when>
+			<when test="searchTag == 'price_3'">
+				WHERE final_price >= 100000
+				AND final_price <![CDATA[<]]> 150000
+			</when>
+			<when test="searchTag == 'price_4'">
+				WHERE final_price >= 150000
+				AND final_price <![CDATA[<]]> 200000
+			</when>
+			<when test="searchTag == 'price_5'">
+				WHERE final_price >= 200000
+			</when>
+		</choose>
+		ORDER BY idx ASC
+		LIMIT #{startRow},#{pageSize};
+	</select>
+
+	<select id="searchsMainBottom" resultType="Map">
+		SELECT clo_imgSrc, name, final_price, review_stars
+		FROM clothes_bottom
+		WHERE name Like CONCAT('%',#{searchWord},'%')
+		<choose>
+			<when test="searchTag == 'price_1'">
+				AND final_price <![CDATA[<]]> 50000
+			</when>
+			<when test="searchTag == 'price_2'">
+				AND final_price >= 50000
+				AND final_price <![CDATA[<]]> 100000
+			</when>
+			<when test="searchTag == 'price_3'">
+				AND final_price >= 100000
+				AND final_price <![CDATA[<]]> 150000
+			</when>
+			<when test="searchTag == 'price_4'">
+				AND final_price >= 150000
+				AND final_price <![CDATA[<]]> 200000
+			</when>
+			<when test="searchTag == 'price_5'">
+				AND final_price >= 200000
+			</when>
+			<otherwise>
+
+			</otherwise>
+		</choose>
+		ORDER BY idx ASC
+		LIMIT #{startRow},#{pageSize};
+	</select>
 	<!-- 마이페이지 주문내역 -->
 
 	
@@ -142,10 +199,11 @@
 		values (#{shoes_id}, #{link_id}, #{shoes_name}, #{user_id})
 	</insert>
 
-	<select id="shoesIdCheckLike">
-		select shoes_id
+
+	<select id="cloSrcCheckLike">
+		select clo_imgSrc
 		from like_tb
-		where shoes_id = #{shoes_id};
+		where clo_imgSrc = #{clo_imgSrc};
 	</select>
 
 	<insert id="reviewInfoInsert">
@@ -186,7 +244,7 @@
 
 	<select id="shoesCount">
 		SELECT count(*)
-		FROM shoes
+		FROM clothes
 		where is_delete = 0
 		<choose>
 			<when test="searchTag == 'price_1'">
@@ -341,11 +399,9 @@
 
 
 	<select id="cartFindList" resultType="Map">
-		SELECT cart.shoes_id, cart.size, cart.quantity, shoes.final_price, 
-		shoes.shoes_name
-		FROM cart, shoes
-		WHERE cart.is_delete = 0 and cart.shoes_id = shoes.shoes_id
-		ORDER BY cart.cart_id ASC
+		SELECT clo_imgSrc, name, price, quantity, size
+		FROM cart
+		ORDER BY cart_id ASC;
 	</select>
 
 
@@ -377,7 +433,7 @@
 	<update id="cartUpdateIsDelete">
 		update cart
 		set is_delete = 1
-		where shoes_id = #{shoes_id}
+		where clo_imgSrc = #{clo_imgSrc}
 	</update>
 
 	<select id="boardIdxData" resultType="Map">

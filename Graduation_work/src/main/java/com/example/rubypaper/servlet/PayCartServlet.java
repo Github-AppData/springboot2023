@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import kotlinx.serialization.json.internal.JsonException;
+
 import net.minidev.json.JSONArray;
 
 
@@ -41,9 +41,7 @@ public class PayCartServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		System.out.println("PayCartServlet");
-		
-		System.out.println("PayCartServlet");
-		
+
 		// 아이디 구하기 
 		HttpSession session;
 		session = request.getSession();
@@ -80,13 +78,13 @@ public class PayCartServlet extends HttpServlet{
         	    JsonNode shoesNode = rootNode.get(shoesKey);
 
         	    if (shoesNode != null) {
-        	        String shoeName = shoesNode.path("shoes_name").asText();
+        	        String name = shoesNode.path("shoes_name").asText();
         	        String way = shoesNode.path("way").asText();
         	        int shoePrice = shoesNode.path("final_price").asInt();
         	        int shoesSize = shoesNode.path("size").asInt();
         	        int quantity = shoesNode.path("shoes_quantity").asInt();
 
-        	        System.out.println("Shoe Name: " + shoeName);
+        	        System.out.println("name: " + name);
         	        System.out.println("Shoe Price: " + shoePrice);
         	        System.out.println("shoes_quantity: " + quantity);
         	        System.out.println("shoesSize: " + shoesSize);
@@ -96,7 +94,7 @@ public class PayCartServlet extends HttpServlet{
         	        order_List.setUser_id(userID);
         	        order_List.setPrice(shoePrice);
         	        order_List.setQuantity(quantity);
-        	        order_List.setShoes_name(shoeName);
+        	        order_List.setName(name);
         	        order_List.setWay(way);
         	        
         	        try {

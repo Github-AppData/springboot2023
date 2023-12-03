@@ -12,6 +12,6 @@ import com.example.rubypaper.mapper.UserMapper;
 public interface CartService {
 	
 	public void cartInsert(Cart cart) throws Exception;
-	public String cartCheckShoesId(String shoes_id) throws Exception;
+	public String cartCheckimgSrc(String clo_imgSrc) throws Exception;
 	public int numberOfCart() throws Exception;
 }

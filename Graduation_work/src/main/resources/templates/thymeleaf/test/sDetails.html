@@ -176,13 +176,11 @@
         <section class="shop-details">
             <div class="container px-4 px-lg-5 my-5">	
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                
+                    <!-- 600 500 -->
                     <div class="col-md-6">
-                    		<iframe src="" id="api-frame-1" width="600" height="500" style="border:none"
-    									allow="autoplay; fullscreen; xr-spatial-tracking" 
-    									xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true"
-    									webkitallowfullscreen="true">
-    					</iframe>
+                        <img src="https://dummyimage.com/260x260/dee2e6/6c757d.jpg" id="img" width="500" height="500" style="border:none"
+                             class="d-inline-block align-text-top">
+                        </img>
     				</div>
     					<!--
     					<div class="sketchfab-embed-wrapper"> 
@@ -209,39 +207,17 @@
 									<div id="click-message" class="hidden"></div>
 	                                    <br><span class="mb-2">사이즈 선택:</span><br>
 	                                    <label>
-	                                        <button class="styled-button" input-link-id="0" id="selectSize0" onclick="size(this);">210</button>
+	                                        <button class="styled-button" input-link-id="0" id="selectSize0" onclick="size(this);">S</button>
 	                                    </label>
 	                                    <label>
-	                                        <button class="styled-button" input-link-id="1" id="selectSize1" onclick="size(this);">220</button>
+	                                        <button class="styled-button" input-link-id="1" id="selectSize1" onclick="size(this);">M</button>
 	                                    </label>
-	                                    
-	                                    <label>
-	                                        <button class="styled-button" input-link-id="2" id="selectSize2" onclick="size(this);">230</button>
-	                                     </label>
-	                                     
-	                                     <label>
-	                                        <button class="styled-button" input-link-id="3" id="selectSize3" onclick="size(this);">240</button>
-	                                     </label>
-	                                     
-	                                     <label>
-	                                        <button class="styled-button" input-link-id="4" id="selectSize4" onclick="size(this);">250</button><br>
-	                                     </label>
-	                                     
-	                                     <label>
-	                                        <button class="styled-button" input-link-id="5" id="selectSize5" onclick="size(this);">260</button>
-	                                     </label>
-	                                     
-	                                     <label>   
-	                                        <button class="styled-button" input-link-id="6" id="selectSize6" onclick="size(this);">270</button>
-	                                     </label>
-	                                     
-	                                     <label>
-	                                        <button class="styled-button" input-link-id="7" id="selectSize7" onclick="size(this);">280</button>
-	                                     </label>
-	                                     
-	                                     <label>
-	                                        <button class="styled-button" input-link-id="8" id="selectSize8" onclick="size(this);">290</button>
-	                                     </label>
+                                        <label>
+                                            <button class="styled-button" input-link-id="2" id="selectSize2" onclick="size(this);">L</button>
+                                        </label>
+                                        <label>
+                                            <button class="styled-button" input-link-id="3" id="selectSize3" onclick="size(this);">XL</button>
+                                        </label>
 	                                </div>
 	                            </div>
 	                            
@@ -251,7 +227,7 @@
 	                                        <input type="text" id="quantity" value="1" name="quantityInput">                        
 	                                    </div>
 	                                </div>
-	                                <button onclick="noticeMessage()" class="primary-btn">장바구니</button>
+	                                <button onclick="cartSendData()" class="primary-btn">장바구니</button>
 	                            </div>
 	                            
 	                            </div>
@@ -516,18 +492,16 @@
     <script type="text/javascript">
 		
 		// 전역변수 공간 입니다만.
-		
-		var imageToModelMapping_real = [];
-		var imageToModelMapping_real2 = [];
-		var iframe_clicked = [];
+
+		var clo_infoArray = [];
 		
 		var shoes_info_final_price;
 		var shoes_id_pay;
 		
-		var shoes_id;
+		var clo_imgSrc;
 	    var total_cost;
 	    var cnt = 0;
-	    var shoes_price = 0;
+	    var price = 0;
 	    var sales = 0;
 	    
 	    var xhr = new XMLHttpRequest();
@@ -570,14 +544,19 @@
 				{
 		            var object = JSON.parse(xhr.responseText);
 		            var objLength = Object.keys(object).length;
+                    console.log("object : ",object);
 		            console.log("objLength : ",objLength);
 		            
 		            console.log(object[0]);
-		            
-		            shoes_id = object[0].uid;
-					shoes_name = object[0].shoes_name;
-					final_price = object[0].final_price;
+
+                    clo_imgSrc = object[0].clo_imgSrc;
+					name = object[0].name;
+					price = object[0].final_price;
 					review_stars = object[0].review_stars;
+
+                    clo_infoArray.push(clo_imgSrc);
+                    clo_infoArray.push(name);
+                    clo_infoArray.push(price);
 					
 					var RatingInnerHTML = '<div class="rating">';
 						
@@ -599,55 +578,50 @@
 					RatingInnerHTML += '</div>';
 					document.getElementById("ratingPlace").innerHTML = RatingInnerHTML;
 					
-					// 장바구니 페이지 갈 정보들 
-					imageToModelMapping_real2.push(shoes_id);
-					imageToModelMapping_real2.push(shoes_name);
-					imageToModelMapping_real2.push(final_price);
-					
-					
-					imageToModelMapping_real.push({ uid: shoes_id, iframeId: 'api-frame-1', shoes_name: shoes_name, final_price:final_price, review_stars:review_stars });
-					console.log("imageToModelMapping_real : ", imageToModelMapping_real[0]);
+
 					
 		            
 					/// Servlet에서 받은 신발의 정보들을 html에다가 set 하는 코드입니다.
 					
 					// 신발 이름 
-					var shoes_info_name = imageToModelMapping_real[0].shoes_name;
-		    		document.getElementById("shoes_name").innerHTML = "<h6>" + shoes_info_name + "</h6>";
+					var clo_name = name;
+		    		document.getElementById("shoes_name").innerHTML = "<h6>" + clo_name + "</h6>";
 					
 					// 신발 가격 
-					shoes_info_final_price = imageToModelMapping_real[0].final_price;
-					shoes_id_pay = imageToModelMapping_real[0].uid;
+					shoes_info_final_price = price;
+					shoes_id_pay = clo_imgSrc;
 					var format_price_real = numeral(shoes_info_final_price).format('0,0');
 		    		document.getElementById("total_cost").innerHTML = "<h5>" + format_price_real + "원 </h5>";
 					
-					
-					imageToModelMapping_real.forEach(function(mapping) 
-					{
-						replaceWith3DModel(mapping.uid, mapping.iframeId);
-					});
+					// image setting
+
+                    document.getElementById("img").src = clo_imgSrc;
+
+
 					
 				} // if (xhr.readyState === 4 && xhr.status === 200) 
 
-			}; // xhr.onreadystatechange 끝 	
+			}; // xhr.onreadystatechange 끝
 			
 			
 			xhr.open("POST", "/DetailPageSetServlet", true); // 비동기 요청 시작.
 		   	xhr.send(null); 
 		   			
 		}; // pageLoad  
-		
-		function noticeMessage(){
+
+        //
+		function cartSendData(){
+
 			var quantity = document.getElementById("quantity").value;
 			
 			console.log("quantity : ",quantity);
 			console.log("selected_size : ", selected_size);
-			imageToModelMapping_real2.push(quantity);
-			imageToModelMapping_real2.push(selected_size);
+			clo_infoArray.push(quantity);
+            clo_infoArray.push(selected_size);
 			
 			xhr2.onreadystatechange = function () 
 			{
-				console.log("imageToModelMapping_real2 : ", imageToModelMapping_real2);
+
 				console.log("xhr2.readyState : ", xhr2.readyState);
 				console.log("xhr2.status : ", xhr2.status);
 				
@@ -663,7 +637,7 @@
 			}
 			
 			xhr2.open("POST", "/CartAddObjectServlet", true);
-			xhr2.send(imageToModelMapping_real2); // sDetails에 있는 정보를 보낸다.
+			xhr2.send(clo_infoArray); // sDetails에 있는 정보를 보낸다.
 		}
 		
 		function showclickToast(message) {

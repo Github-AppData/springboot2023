@@ -3,14 +3,10 @@ package com.example.rubypaper.servicmpl;
 import java.util.List;
 import java.util.Map;
 
+import com.example.rubypaper.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.rubypaper.dto.Like_tb;
-import com.example.rubypaper.dto.Order_List;
-import com.example.rubypaper.dto.Paging;
-import com.example.rubypaper.dto.Review;
-import com.example.rubypaper.dto.Clothes;
 import com.example.rubypaper.mapper.TotalMapper;
 import com.example.rubypaper.service.TotalService;
 
@@ -94,7 +90,12 @@ public class TotalServicempl implements TotalService{
 	public List<Map<String, Object>> TopSelect(Paging paging) throws Exception {
 		return totalMapper.TopSelect(paging);
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> BottomSelect(Paging_bottom paging_bottom) throws Exception {
+		return totalMapper.BottomSelect(paging_bottom);
+	}
+
 	@Override
 	public List<Map<String, Object>> searchsMain(Paging paging) throws Exception {
 		return totalMapper.searchsMain(paging);
@@ -126,8 +127,8 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public int cartUpdateIsDelete(String shoes_id) throws Exception{
-		return totalMapper.cartUpdateIsDelete(shoes_id);
+	public int cartUpdateIsDelete(String clo_imgSrc) throws Exception{
+		return totalMapper.cartUpdateIsDelete(clo_imgSrc);
 	}
 
 	@Override
@@ -177,7 +178,7 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public Clothes shoesIdCheckLike(String shoes_id) throws Exception {
+	public Clothes cloSrcCheckLike(String shoes_id) throws Exception {
 		return totalMapper.shoesIdCheckLike(shoes_id);
 		
 	}
@@ -252,6 +253,11 @@ public class TotalServicempl implements TotalService{
 	@Override
 	public List<Map<String, Object>> myPageToSDetailsSetSelect(int order_id) throws Exception {
 		return totalMapper.myPageToSDetailsSetSelect(order_id);
-	}	
+	}
+
+	public List<Map<String, Object>> searchsMainBottom(Paging_bottom paging_bottom) throws Exception {
+		return totalMapper.searchsMainBottom(paging_bottom);
+	}
+
 
 }
