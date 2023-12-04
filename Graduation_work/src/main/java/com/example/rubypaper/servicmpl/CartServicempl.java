@@ -17,15 +17,12 @@ public class CartServicempl implements CartService{
 	public void cartInsert(Cart cart) throws Exception {
 		cartMapper.cartInsert(cart);
 	}
-
 	@Override
 	public String cartCheckimgSrc(String clo_imgSrc) throws Exception {
 		return cartMapper.cartCheckimgSrc(clo_imgSrc);
 	}
-
 	@Override
 	public int numberOfCart() throws Exception {
 		return cartMapper.numberOfCart();
 	}
-	
 }
