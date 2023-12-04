@@ -57,8 +57,8 @@ public class TotalServicempl implements TotalService{
 	}
 	
 	@Override
-	public int shoesCount(Paging paging) throws Exception{
-		return totalMapper.shoesCount(paging);
+	public int clothesCount(Paging paging) throws Exception{
+		return totalMapper.clothesCount(paging);
 	}
 	
 	@Override
@@ -102,8 +102,8 @@ public class TotalServicempl implements TotalService{
 	}
 	
 	@Override
-	public List<Map<String, Object>> searchAdminPageShoes(Paging paging) throws Exception {
-		return totalMapper.searchAdminPageShoes(paging);
+	public List<Map<String, Object>> searchAdminPageClothes(Paging paging) throws Exception {
+		return totalMapper.searchAdminPageClothes(paging);
 	}
 	
 	@Override
@@ -148,23 +148,23 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public List<Map<String, Object>> adminPageSelectShoesList(Paging paging) throws Exception {
-		return totalMapper.adminPageSelectShoesList(paging);
+	public List<Map<String, Object>> adminPageSelectClothesList(Paging paging) throws Exception {
+		return totalMapper.adminPageSelectClothesList(paging);
 	}
 
 	@Override
-	public int adminPageUpdateShoesInfo(Clothes shoes) throws Exception {
-		return totalMapper.adminPageUpdateShoesInfo(shoes);
+	public int adminPageUpdateClothesInfo(Clothes clothes) throws Exception {
+		return totalMapper.adminPageUpdateClothesInfo(clothes);
 	}
 
 	@Override
-	public void adminPageDeleteShoesInfo(String shoes_name) throws Exception {
-		totalMapper.adminPageDeleteShoesInfo(shoes_name);
+	public void adminPageDeleteClothesInfo(String name) throws Exception {
+		totalMapper.adminPageDeleteClothesInfo(name);
 	}
 
 	@Override
-	public void adminPageShoesInsert(Clothes shoes) throws Exception {
-		totalMapper.adminPageShoesInsert(shoes);
+	public void adminPageClothesInsert(Clothes clothes) throws Exception {
+		totalMapper.adminPageClothesInsert(clothes);
 	}
 
 	@Override
@@ -221,13 +221,13 @@ public class TotalServicempl implements TotalService{
 	}
 
 	@Override
-	public int reviewRatingAvgSelect(String shoes_id) throws Exception {
-		return totalMapper.reviewRatingAvgSelect(shoes_id);
+	public int reviewRatingAvgSelect(String clo_imgSrc) throws Exception {
+		return totalMapper.reviewRatingAvgSelect(clo_imgSrc);
 	}
 
 	@Override
-	public void shoesRatingStarsUpdate(Clothes shoes) throws Exception {
-		totalMapper.shoesRatingStarsUpdate(shoes);
+	public void clothesRatingStarsUpdate(Clothes clothes) throws Exception {
+		totalMapper.clothesRatingStarsUpdate(clothes);
 	}
 
 	@Override

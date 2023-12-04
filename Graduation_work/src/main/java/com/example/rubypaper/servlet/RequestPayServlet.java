@@ -55,13 +55,14 @@ public class RequestPayServlet extends HttpServlet{
         
         String [] parts = str.split(",");
         
-        int size = Integer.parseInt(parts[0]);
+        String size = parts[0];
         String name = parts[1];
         String imgSrc = parts[2];
         int quantity = Integer.parseInt(parts[3]);
         int price = Integer.parseInt(parts[4]);
         String way = parts[5];
-        
+
+        System.out.println("size : "+ size);
         
         // 객체에 정보 셋.
         order_List.setSize(size);

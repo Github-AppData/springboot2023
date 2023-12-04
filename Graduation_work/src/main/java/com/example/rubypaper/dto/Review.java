@@ -3,7 +3,7 @@ package com.example.rubypaper.dto;
 public class Review {
 	
 	private String review_id;
-	private String shoes_id;
+	private String clo_imgSrc;
 	private int rating;
 	private String reviewText;
 	public String getReview_id() {
@@ -12,12 +12,15 @@ public class Review {
 	public void setReview_id(String review_id) {
 		this.review_id = review_id;
 	}
-	public String getShoes_id() {
-		return shoes_id;
+
+	public String getClo_imgSrc() {
+		return clo_imgSrc;
 	}
-	public void setShoes_id(String shoes_id) {
-		this.shoes_id = shoes_id;
+
+	public void setClo_imgSrc(String clo_imgSrc) {
+		this.clo_imgSrc = clo_imgSrc;
 	}
+
 	public int getRating() {
 		return rating;
 	}
@@ -30,10 +33,14 @@ public class Review {
 	public void setReviewText(String reviewText) {
 		this.reviewText = reviewText;
 	}
+
 	@Override
 	public String toString() {
-		return "Review [review_id=" + review_id + ", shoes_id=" + shoes_id + ", rating=" + rating + ", reviewText="
-				+ reviewText + "]";
+		return "Review{" +
+				"review_id='" + review_id + '\'' +
+				", clo_imgSrc='" + clo_imgSrc + '\'' +
+				", rating=" + rating +
+				", reviewText='" + reviewText + '\'' +
+				'}';
 	}
-
 }

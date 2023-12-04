@@ -29,11 +29,11 @@ public class ShoesDeleteServlet extends HttpServlet{
         while ((line = reader.readLine()) != null) {
         	deleteInfo.append(line);
         }
-        String shoes_name = deleteInfo.toString();
-        System.out.println("shoes_name : "+shoes_name);
+        String name = deleteInfo.toString();
+        System.out.println("name : "+name);
         
         try {
-			totalService.adminPageDeleteShoesInfo(shoes_name);
+			totalService.adminPageDeleteClothesInfo(name);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

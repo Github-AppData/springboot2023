@@ -5,7 +5,7 @@ import java.util.Date;
 public class Order_List {
 	
 	private int oreder_id;
-	private int size;
+	private String size;
 	private String clo_imgSrc;
 	private String name;
 	private int quantity;
@@ -25,11 +25,11 @@ public class Order_List {
 		this.oreder_id = oreder_id;
 	}
 
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 
@@ -109,7 +109,7 @@ public class Order_List {
 	public String toString() {
 		return "Order_List{" +
 				"oreder_id=" + oreder_id +
-				", size=" + size +
+				", size='" + size + '\'' +
 				", clo_imgSrc='" + clo_imgSrc + '\'' +
 				", name='" + name + '\'' +
 				", quantity=" + quantity +

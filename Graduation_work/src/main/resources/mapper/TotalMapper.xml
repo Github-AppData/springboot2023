@@ -6,13 +6,13 @@
 
 	<!-- 결제 - 카카오 -->
 	<insert id="requestPay2InfoInsert">
-		insert into order_List(order_id, shoes_name, shoes_id, quantity, price, size, user_id, order_date, way)
-		SELECT COALESCE(MAX(order_id) + 1, 1), #{shoes_name}, #{shoes_id}, #{quantity}, #{price}, #{size}, #{user_id}, #{order_date}, #{way}
+		insert into order_List(order_id, name, clo_imgSrc, quantity, price, size, user_id, order_date, way)
+		SELECT COALESCE(MAX(order_id) + 1, 1), #{name}, #{clo_imgSrc}, #{quantity}, #{price}, #{size}, #{user_id}, #{order_date}, #{way}
 		FROM order_List
 	</insert>
 	
 	<select id="myPageOrderListSelect" resultType="Map">
-		select order_id, shoes_name, shoes_id, quantity, size, price, order_date, way
+		select order_id, name, quantity, size, price, order_date, way, clo_imgSrc
 		from order_List
 		where user_id = #{user_id}
 		order by order_id asc;
@@ -154,7 +154,7 @@
 	</select>
 	
 	<select id="selectMain" resultType="Map">
-		select shoes_id, shoes_name, final_price
+		select clo_imgSrc, name, final_price
 		from main
 		order by idx asc;
 	</select>
@@ -209,42 +209,30 @@
 	</select>
 
 	<insert id="reviewInfoInsert">
-		insert into review(review_id, shoes_id, rating, reviewText)
-		values (#{review_id}, #{shoes_id}, #{rating}, #{reviewText})
+		insert into review(review_id, clo_imgSrc, rating, reviewText)
+		values (#{review_id}, #{clo_imgSrc}, #{rating}, #{reviewText})
 	</insert>
 
 	<select id="reviewRatingAvgSelect">
-		SELECT ROUND(SUM(rating) / COUNT(shoes_id)) AS average_rating
+		SELECT ROUND(SUM(rating) / COUNT(clo_imgSrc)) AS average_rating
 		FROM review
-		WHERE shoes_id = #{shoes_id};
+		WHERE clo_imgSrc = #{clo_imgSrc};
 	</select>
 
-	<update id="shoesRatingStarsUpdate">
-		update shoes
+	<update id="clothesRatingStarsUpdate">
+		update clothes
 		set review_stars = #{review_stars}
-		where shoes_id = #{shoes_id};
+		where clo_imgSrc = #{clo_imgSrc};
 	</update>
 
-	<!--
-		INSERT INTO User (idx, user_id, name, birthday,  pw, adress, detail_adress,
-	email, salt, phone, is_Status)
-		SELECT COALESCE(MAX(idx) + 1, 1), #{user_id}, #{name}, #{birthday}, #{pw},
-	#{adress}, #{detail_adress}, #{email}, #{salt}, #{phone}, #{is_Status}
-		FROM User  
-	-->
-
-	<!--  select user_id
-		from user	 
-		where user_id = #{id} -->
-
-	<select id="searchAdminPageShoes" resultType="Map">
-		SELECT shoes_id, shoes_name, shoes_price, sales, final_price
-		FROM shoes
-		WHERE shoes_Name Like CONCAT('%',#{searchWord},'%')
+	<select id="searchAdminPageClothes" resultType="Map">
+		SELECT clo_imgSrc, name, price, sales, final_price
+		FROM clothes
+		WHERE name Like CONCAT('%',#{searchWord},'%')
 		LIMIT #{startRow},#{pageSize};
 	</select>
 
-	<select id="shoesCount">
+	<select id="clothesCount">
 		SELECT count(*)
 		FROM clothes
 		where is_delete = 0
@@ -318,9 +306,9 @@
 		title LIKE CONCAT('%',#{boards_Name},'%');
 	</select>
 
-	<select id="adminPageSelectShoesList" resultType="Map">
-		select shoes_id, shoes_name, shoes_price, sales, final_price
-		from shoes
+	<select id="adminPageSelectClothesList" resultType="Map">
+		select clo_imgSrc, name, price, sales, final_price
+		from clothes
 		where is_delete = 0
 		order by idx asc
 		LIMIT #{startRow},#{pageSize};
@@ -332,22 +320,22 @@
 		where user_id = "admin";
 	</select>
 
-	<update id="adminPageUpdateShoesInfo">
-		update shoes
-		set shoes_price = #{shoes_price}, sales = #{sales}, final_price =
+	<update id="adminPageUpdateClothesInfo">
+		update clothes
+		set price = #{price}, sales = #{sales}, final_price =
 		#{final_price}
-		where shoes_name = #{shoes_name};
+		where name = #{name};
 	</update>
 
-	<delete id="adminPageDeleteShoesInfo">
+	<delete id="adminPageDeleteClothesInfo">
 		Delete
-		from shoes
-		where shoes_name = #{shoes_name};
+		from clothes
+		where name = #{name};
 	</delete>
 
-	<insert id="adminPageShoesInsert">
-		insert into shoes (shoes_id, shoes_name, shoes_price, final_price)
-		values (#{shoes_id}, #{shoes_name}, #{shoes_price}, #{final_price})
+	<insert id="adminPageClothesInsert">
+		insert into clothes (clo_imgSrc, name, price, final_price)
+		values (#{clo_imgSrc}, #{name}, #{price}, #{final_price})
 	</insert>
 
 	<!-- <insert id="userInsert">

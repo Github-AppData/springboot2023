@@ -62,7 +62,8 @@ public class SampleController {
 		System.out.println("userList : "+userList.toString());
 		System.out.println("boardList : "+boardList.toString());
 		System.out.println("orderList : "+orderList.toString());
-						
+
+
 		model.addAttribute("list", userList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("orderList", orderList);
@@ -273,7 +274,7 @@ public class SampleController {
 			}
 		}else {
 			try {
-				totalArticle = totalService.shoesCount(paging);
+				totalArticle = totalService.clothesCount(paging);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -518,11 +519,11 @@ public class SampleController {
 		
 		try {
 			if(search != null) {
-				shoesList = totalService.searchAdminPageShoes(paging);
+				shoesList = totalService.searchAdminPageClothes(paging);
 				totalArticle = totalService.searchClothesCount(paging);
 			} else {
-				shoesList = totalService.adminPageSelectShoesList(paging);
-				totalArticle = totalService.shoesCount(paging);
+				shoesList = totalService.adminPageSelectClothesList(paging);
+				totalArticle = totalService.clothesCount(paging);
 			}
 			paging.setTotalArticle(totalArticle);
 			paging.setTotalPage(totalArticle);

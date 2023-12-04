@@ -81,15 +81,15 @@ public class PayCartServlet extends HttpServlet{
         	        String name = shoesNode.path("shoes_name").asText();
         	        String way = shoesNode.path("way").asText();
         	        int shoePrice = shoesNode.path("final_price").asInt();
-        	        int shoesSize = shoesNode.path("size").asInt();
+        	        String size = shoesNode.path("size").asText();
         	        int quantity = shoesNode.path("shoes_quantity").asInt();
 
         	        System.out.println("name: " + name);
         	        System.out.println("Shoe Price: " + shoePrice);
         	        System.out.println("shoes_quantity: " + quantity);
-        	        System.out.println("shoesSize: " + shoesSize);
+        	        System.out.println("size: " + size);
         	        
-        	        order_List.setSize(shoesSize);
+        	        order_List.setSize(size);
         	        order_List.setOrder_date(formatedNow);
         	        order_List.setUser_id(userID);
         	        order_List.setPrice(shoePrice);

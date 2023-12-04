@@ -14,10 +14,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/AdminShoesInfoUpdateServlet")
-public class AdminShoesInfoUpdateServlet  extends HttpServlet{
+@WebServlet("/AdminclothesInfoUpdateServlet")
+public class AdminclothesInfoUpdateServlet  extends HttpServlet{
 	
-	Clothes shoes = new Clothes();
+	Clothes clothes = new Clothes();
 	String [] parts = null;
 	
 	@Autowired
@@ -53,13 +53,13 @@ public class AdminShoesInfoUpdateServlet  extends HttpServlet{
         int final_price = 0;
         final_price = Integer.parseInt(parts[3]) ; // 최종 가격 
         
-        shoes.setFinal_price(final_price);
-        shoes.setSales(sales);
-        shoes.setName(name);
-        shoes.setPrice(price);
-        
+        clothes.setFinal_price(final_price);
+        clothes.setSales(sales);
+        clothes.setName(name);
+        clothes.setPrice(price);
+        System.out.println("AdminclothesInfoUpdateServlet clothes : "+clothes);
         try {
-			totalService.adminPageUpdateShoesInfo(shoes);
+			totalService.adminPageUpdateClothesInfo(clothes);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
