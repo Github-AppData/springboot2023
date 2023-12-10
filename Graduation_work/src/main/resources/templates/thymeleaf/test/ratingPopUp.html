@@ -4,16 +4,35 @@
 
 <meta charset="UTF-8">
 <title>Rating PopUp</title>    
-	<!-- Css Styles -->
-	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<!-- include libraries(jQuery, bootstrap) -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
+	integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
+
+    <!-- Css Styles -->
+   <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/rating.css" type="text/css">
+	
 </head>
 <body>
 	<form id="reviewForm" action="/ReviewInsertServlet" method="POST">
 		<div class="contain">
 			<div><br>
 			<p class="ff">별점 남기기</p>
-			<textarea name="reviewText"cols="61" rows="4" placeholder=" 자유롭게 작성해주세요." required></textarea>
+			<div class="pt-1">
+						<textarea id="summernote" class="form-control" name="reviewText" required ></textarea>
+					</div>    
+					<script>
+						$('#summernote').summernote({
+						  placeholder: '자유롭게 작성해주세요',
+						  tabsize: 2,
+						  height: 300
+						});
+					  </script>
 			</div>
 		<div class="star-rating space-x-4 ml-auto mr-1">
 			<input type="radio" id="5-stars" name="rating" value="5"/>

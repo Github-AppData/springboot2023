@@ -100,11 +100,10 @@
                 <div class="col-lg-6 col-md-6" >
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="main">Main</a></li>
-                            <li><a href="sMain">Clothes</a>
-                            <li><a href="noticdBoard">NoticdBoard </a></li>
-                            <li><a href="sContact">Market Place</a></li>
-
+                            <li class="active"><a href="main">메인화면</a></li>
+                            <li><a href="sMain">옷</a>
+                            <li><a href="noticdBoard">게시판 </a></li>
+                            <li><a href="sContact">매장찾기</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -125,11 +124,37 @@
 
     <!-- Hero Section Begin --> <!-- 배너 슬라이드 부분 -->
     <section class="hero">
-	<div style="text-align:center" oncontextmenu='return false'>
-    	<video class="video" src="video/sVideo.mp4" autoplay="autoplay" muted="muted" loop="loop" >
-    	
-    	</video>
-	</div>
+	 <div class="hero__slider owl-carousel">
+            <div class="hero__items set-bg" data-setbg="img/blog/blog-15.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h6>Fall - winter Collection</h6>
+                                <h2>NB 2023 워크데이</h2>
+                                <p>2023 그레이데이를 기념한 MIUS 컬렉션이 6월 24일 뉴발란스 서울 현대아울렛에서 발매됩니다.</p>
+                                <a href="sMain" class="primary-btn">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__items set-bg" data-setbg="img/blog/blog-16.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h6>Fall - winter Collection</h6>
+                                <h2>NBSC 23FW 컬렉션</h2>
+                                <p>117년 전통 TEAM BLUE VS TEAM GREEN</p>
+                                <a href="sMain" class="primary-btn">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+	 
     </section>
     <!-- Hero Section End -->
 
@@ -140,44 +165,44 @@
         <img src="https://dummyimage.com/225x225/dee2e6/6c757d.jpg" id="canvas1" style="margin-right: 20px;
   					margin-bottom: 20px;" width="225" height="225">
   		</img>
-        <h6 style="font-weight:bold;" id="name1"></h6>
-        <p class="price3d" id="price1"></p>
+        <h6 style="font-weight:bold;" id="shoes1_name"></h6>
+        <p class="price3d" id="shoes1_price"></p>
         
       </a>
       <a onclick="DetailPageSet(this)" data-link-id="1" th:href="@{sDetails}"> 
         <img src="https://dummyimage.com/225x225/dee2e6/6c757d.jpg" id="canvas2" style="margin-right: 20px;
   					margin-bottom: 20px;" width="225" height="225">
   		</img>
-        <h6 style="font-weight:bold;" id="name2">	</h6>
-        <p class="price3d" id="price2"></p>
+        <h6 style="font-weight:bold;" id="shoes2_name">	</h6>
+        <p class="price3d" id="shoes2_price"></p>
       </a>
       <a onclick="DetailPageSet(this)" data-link-id="2" th:href="@{sDetails}">
         <img src="https://dummyimage.com/225x225/dee2e6/6c757d.jpg" id="canvas3" style="margin-right: 20px;
   					margin-bottom: 20px;" width="225" height="225">
   		</img>
-        <h6 style="font-weight:bold;" id="name3"></h6>
-        <p class="price3d" id="price3"></p>
+        <h6 style="font-weight:bold;" id="shoes3_name"></h6>
+        <p class="price3d" id="shoes3_price"></p>
       </a>
       <a onclick="DetailPageSet(this)" data-link-id="3" th:href="@{sDetails}"> 
         <img src="https://dummyimage.com/225x225/dee2e6/6c757d.jpg" id="canvas4" style="margin-right: 20px;
   					margin-bottom: 20px;" width="225" height="225">
   		</img>
-        <h6 style="font-weight:bold;" id="name4"></h6>
-        <p class="price3d" id="price4"></p>
+        <h6 style="font-weight:bold;" id="shoes4_name"></h6>
+        <p class="price3d" id="shoes4_price"></p>
       </a>
       <a onclick="DetailPageSet(this)" data-link-id="4" th:href="@{sDetails}"> 
         <img src="https://dummyimage.com/225x225/dee2e6/6c757d.jpg" id="canvas5" style="margin-right: 20px;
   					margin-bottom: 20px;" width="225" height="225">
   		</img>
-        <h6 style="font-weight:bold;" id="name5"> </h6>
-        <p class="price3d" id="price5"></p>
+        <h6 style="font-weight:bold;" id="shoes5_name"> </h6>
+        <p class="price3d" id="shoes5_price"></p>
       </a>
       <a onclick="DetailPageSet(this)" data-link-id="5" th:href="@{sDetails}"> 
         <img src="https://dummyimage.com/225x225/dee2e6/6c757d.jpg" id="canvas6" style="margin-right: 20px;
   					margin-bottom: 20px;" width="225" height="225">
   		</img>
-        <h6 style="font-weight:bold;" id="name6"></h6>
-        <p class="price3d" id="price6"></p>
+        <h6 style="font-weight:bold;" id="shoes6_name"></h6>
+        <p class="price3d" id="shoes6_price"></p>
       </a>
       <div class="clearfix"></div>
     </div>
@@ -313,23 +338,26 @@
 
     <!-- Js Plugins -->
     <script>
+		/* 메인 화면에 있는 신발 아이디 순서대로. -->
+		<!-- 562be2471d5b45e8a6946fbbcc7c0f04 -->
+		<!-- 00fd99e778c244c3bd3b65f99dad7cb2 -->
+		<!-- 17f21b0a2515455f96ad194ad5be9142 -->
+		<!-- 348c77822bff4de3b6df59839b2fd201
+		<!-- b404398cf8ab4773b4b15230a2f7c292 
+		<!-- 3d8b49d8fdd54ef8afb69735fa452ee2 */
 		
 		var xhr = new XMLHttpRequest();
 		var xhr2 = new XMLHttpRequest();
 		var object = null;
-		var cloinfo_Array = [];
+		var imageToModelMapping_real = [];
 		
 		window.onload= pageLoad;
 		
-		var ary_clothes_name = ["name1", "name2", "name3", "name4"
-		, "name5", "name6"];
-
-        var ary_clothes_imgId = ["canvas1", "canvas2", "canvas3", "canvas4"
-            , "canvas5", "canvas6"];
-
-
-        var ary_clothes_price = ["price1", "price2", "price3", "price4"
-		, "price5", "price6"];
+		var ary_shoes_name = ["shoes1_name", "shoes2_name", "shoes3_name", "shoes4_name"
+		, "shoes5_name", "shoes6_name"];
+		
+		var ary_shoes_price = ["shoes1_price", "shoes2_price", "shoes3_price", "shoes4_price"
+		, "shoes5_price", "shoes6_price"];
 		
 		// main 페이지에 정보를 set하는 
 		function pageLoad()
@@ -344,17 +372,15 @@
 					objLength = Object.keys(object).length;
 					
 					for(var i = 0; i < objLength; i++){
-						cloinfo_Array.push({clo_imgSrc: object[i].clo_imgSrc, name: object[i].name, final_price: object[i].final_price});
-						console.log("cloinfo_Array : "+i, cloinfo_Array[i]);
+						imageToModelMapping_real.push({uid: object[i].shoes_id, shoes_name: object[i].shoes_name, final_price: object[i].final_price});
+						console.log("imageToModelMapping_real : "+i, imageToModelMapping_real[i]);
 						
-						var clothes_info_name = cloinfo_Array[i].name;
-						var clothes_info_price = cloinfo_Array[i].final_price;
-
-                        document.getElementById(ary_clothes_imgId[i]).src = cloinfo_Array[i].clo_imgSrc;
+						var shoes_info_name = imageToModelMapping_real[i].shoes_name;
+						var shoes_info_price = imageToModelMapping_real[i].final_price;
 						
-						var format_clothes_price = numeral(clothes_info_price).format('0,0');
-						document.getElementById(ary_clothes_name[i]).innerHTML = "<h5>" + clothes_info_name + "</h5>";
-						document.getElementById(ary_clothes_price[i]).innerHTML = "<h6>" + format_clothes_price + "원 </h6>";
+						var format_shoes_price = numeral(shoes_info_price).format('0,0');
+						document.getElementById(ary_shoes_name[i]).innerHTML = "<h5>" + shoes_info_name + "</h5>";
+						document.getElementById(ary_shoes_price[i]).innerHTML = "<h6>" + format_shoes_price + "원 </h6>";
 					}
 				}
 			}
@@ -371,7 +397,7 @@
 			
 			var send_ary = [];
 			
-			var dataToSend = cloinfo_Array[link_id];
+			var dataToSend = imageToModelMapping_real[link_id];
 			
 			if (dataToSend != null) {
 				console.log("dataToSend NOT NULL");

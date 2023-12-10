@@ -13,9 +13,9 @@
 		                  
 		        console.log("shoesPriceReal : ", real_price);
 		       	console.log("quantity : ", quantity);
-		       	console.log("clo_imgSrc : ", clo_imgSrc);	
+		       	console.log("shoes_id_pay : ", shoes_id_pay);	
 		       	
-		       	pay_data.push(clo_imgSrc);
+		       	pay_data.push(shoes_id_pay);
 		       	pay_data.push(shoes_name);
 		       	pay_data.push(quantity);
 		       	
@@ -72,20 +72,25 @@
 		var pay2_data = [];
 		
 		var quantity = document.getElementById("quantity").value;
-		var name = document.getElementById("shoes_name").textContent;
+		var shoes_name2 = document.getElementById("shoes_name").textContent;
                 
         //class가 btn_payment인 태그를 선택했을 때 작동한다.       
         var shoesPriceReal = parseInt(shoes_info_final_price);
         var real_price = shoesPriceReal * quantity;
+                  
+        console.log("shoesPriceReal : ", real_price);
+       	console.log("quantity : ", quantity);
+       	console.log("shoes_id_pay : ", shoes_id_pay);	
+       	console.log("selected_size2 : ", selected_size);	
        	
-       	pay2_data.push(selected_size);
-       	pay2_data.push(name);
-       	pay2_data.push(clo_imgSrc);
+       	pay2_data.push(selected_size); 
+       	pay2_data.push(shoes_name2);
+       	pay2_data.push(shoes_id_pay);
        	pay2_data.push(quantity);
        	pay2_data.push(real_price);
        	pay2_data.push("KaKao");
-
-       	console.log("pay2_data : ", pay2_data);
+       	
+       	
         
         // 실제 결제완료시 상품 테이블로 insert 될 수 있도록 서블릿으로 가는 코드.
         var xhr_pay2 = new XMLHttpRequest();
@@ -108,7 +113,7 @@
             pay_method: "card",
             merchant_uid: 'merchant_' + new Date().getTime(),
             name : '주문명:결제테스트'/*상품명*/,
-            name: name,
+            name: "테스트",
             amount: real_price,
             buyer_name : '테스터',
             buyer_tel: "010-3061-3357",

@@ -130,13 +130,12 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
-						<ul>
-							<li><a href="main">Main</a></li>
-							<li><a href="sMain">Clothes</a>
-							<li><a href="noticdBoard">NoticdBoard </a></li>
-							<li><a href="sContact">Market Place</a></li>
-
-						</ul>
+                        <ul>
+                            <li><a href="main">메인화면</a></li>
+                            <li><a href="sMain">신발</a>
+                            <li><a href="noticdBoard">게시판 </a></li>
+                            <li><a href="sContact">매장찾기</a></li>
+                        </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3 col-md-3">
@@ -496,7 +495,7 @@
 					}
 					//필요한 것만 불러오도록 변경
 					for(var i = 0; i < objLength; i++){
-						cloinfo_Array.push({clo_imgSrc: object[i].clo_imgSrc, name: object[i].name, final_price: object[i].price});
+						cloinfo_Array.push({clo_imgSrc: object[i].clo_imgSrc, name: object[i].name, price: object[i].price});
 						console.log("cloinfo_Array : ", cloinfo_Array[i]);
 					}
 					
@@ -521,7 +520,7 @@
 					
 					for (var i = 0; i < objLength; i++) {
 						var clo_info_name = cloinfo_Array[i].name;
-						var clo_info_price = cloinfo_Array[i].final_price;
+						var clo_info_price = cloinfo_Array[i].price;
 						var format_price_real = numeral(clo_info_price).format('0,0');
 						price_sum += clo_info_price;						
 						document.getElementById(article_id[i]).innerHTML = "<h4>" + clo_info_name + "</h4>";
@@ -532,6 +531,11 @@
 
 						//document.getElementById(item_[num]).innerHTML = '';
 					}
+					
+					cloinfo_Array.forEach(function (mapping) {
+						replaceWith3DModel(mapping.uid, mapping.iframeId);
+					});
+
 				} else if (xhr.readyState === 4 && xhr.status === 400){
 					showLoginToast("로그인하고 오세요.");
 					
@@ -726,7 +730,7 @@
 			} else {
 				console.log("dataToSend NULL");
 			}
-			console.log("jsonData : ", jsonData);
+
 
 			xhr2.open("POST", "/ProductDetailPageServlet", true);
 			xhr2.send(jsonData); // ProductDetailPageServlet 보낼 요청

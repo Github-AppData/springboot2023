@@ -251,7 +251,11 @@
 					     <div class="page-utilities">
 						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 								
-
+							    <div class="col-auto">
+					                    <div class="col-auto">
+					                        &nbsp;&nbsp;<button onclick="addRow()"  style="background-color: orangered; color: white;" type="submit" class="btn app-btn-secondary"><b>등록하기</b></button>
+					                    </div>
+							    </div><!--//col-->
 							    <div class="col-auto">						    
 								    
 							    </div>
@@ -286,9 +290,9 @@
 											</thead>
 											<tbody>
 												<tr th:each="shoesList, rowstat : ${shoesList}">
-													<td th:id="name + ${rowstat.count}" class="cell" th:text="${shoesList.name}"><span class="truncate"></span></td>
-													<td th:id="price + ${rowstat.count}" th:data-id="${rowstat.count}" class="cell" th:text="${shoesList.price}"></td>
-													<td th:id="sales + ${rowstat.count}" th:data-id="${rowstat.count}" class="cell" th:text="${shoesList.sales}" ></td>
+													<td th:id="shoes_name + ${rowstat.count}" class="cell" th:text="${shoesList.shoes_name}"><span class="truncate"></span></td>
+													<td th:id="shoes_price + ${rowstat.count}" th:data-id="${rowstat.count}" class="cell" th:text="${shoesList.shoes_price}"></td>
+													<td th:id="shoes_sales + ${rowstat.count}" th:data-id="${rowstat.count}" class="cell" th:text="${shoesList.sales}" ></td>
 													<td th:id="result + ${rowstat.count}" class="cell" th:text="${shoesList.final_price}"></td>
 													<td class="cell"><span th:id="cheangeName+${rowstat.count}"><button type="button" class="pretty-revisebutton" th:data-link-id="${rowstat.count}" th:onclick="changeShoesInfo(this)">수정</button></span></td>
 													<td class="cell"><button class="pretty-deletebutton" onclick="deleteShoesInfo(this)" th:data-link-id="${rowstat.count}">삭제</button></td>
@@ -393,19 +397,19 @@
 			var selectRows = document.querySelectorAll('[data-id="' + linkId + '"]');
 			console.log(selectRows);
 			
-			// price
-			var price_sales = 'sales' + linkId;
-			var price_sales_real = document.getElementById(price_sales).textContent;
-			console.log(price_sales_real);
+			// shoes_price
+			var shoes_price_sales = 'shoes_sales' + linkId;
+			var shoes_price_sales_real = document.getElementById(shoes_price_sales).textContent;
+			console.log(shoes_price_sales_real);
 			
-			// price
-			var price = 'price' + linkId;
-			var price_real = document.getElementById(price).textContent;
-			console.log(price_real);
+			// shoes_price
+			var shoes_price = 'shoes_price' + linkId;
+			var shoes_price_real = document.getElementById(shoes_price).textContent;
+			console.log(shoes_price_real);
 			
 			
 			// textContent 한 값을 배열에 저장 
-			var s = [price_real, price_sales_real];
+			var s = [shoes_price_real, shoes_price_sales_real];
 			
 			// input 태그의 width 사이즈 저장.
 			var input_size = [66, 25];
@@ -448,25 +452,40 @@
 
 		}
 		
+		function addRow() {
+            // 1. table 요소 선택
+            var table = document.getElementById("myTable");
 
+            // 2. 새로운 행 추가
+            var newRow = table.insertRow(1); // 0은 맨 첫 번째 위치를 나타냅니다.
 
+            // 3. 새로운 행에 데이터 셀 추가 (이 예제에서는 3개의 셀을 추가합니다)
+            var cell0 = newRow.insertCell(0);
+            var cell1 = newRow.insertCell(1);
+            var cell2 = newRow.insertCell(2);
+            var cell3 = newRow.insertCell(3);
 
+            // 각 셀에 내용을 추가 - 최종가격은 나중에 서블릿에서 추가하자 
+            cell0.innerHTML = '신발 아이디 : <input type="text" id="shoes_id"></input>';
+            cell1.innerHTML = '신발 이름 : <input type="text" id="shoes_name"></input>';
+            cell2.innerHTML = '신발 가격 : <input type="number" id="shoes_price"></input>';
+            cell3.innerHTML = '<button onclick="adminPageInsert(this)" class="pretty-revisebutton">저장</button>';
+        }
         
         function adminPageInsert(element)
         {
 			var data_array = [];
 			
-			var clo_imgSrc = document.getElementById("clo_imgSrc").value;
-			var name = document.getElementById("name").value;
-			var price = document.getElementById("price").value;
+			var shoes_id = document.getElementById("shoes_id").value;
+			var shoes_name = document.getElementById("shoes_name").value;
+			var shoes_price = document.getElementById("shoes_price").value;
 			
-			data_array.push(clo_imgSrc);
-			data_array.push(name);
-			data_array.push(price);
-
-			// TODO : sss.html sucess.
+			data_array.push(shoes_id);
+			data_array.push(shoes_name);
+			data_array.push(shoes_price);
+			
 			// POST 요청 설정
-			xhr3.open("POST", "/APClothesInsertServlet", true);
+			xhr3.open("POST", "/AdminPageShoesInsertServlet", true);
 			xhr3.setRequestHeader("Content-Type", "application/json");
 			
 			xhr3.addEventListener("load", function() {
@@ -503,13 +522,13 @@
 				real[i] = InputId.value;
 			}	
 			
-			var name_id = "name" + linkId;
-			var name = document.getElementById(name_id).textContent;
-			real.push(name);
+			var shoes_name_id = "shoes_name" + linkId;
+			var shoes_name = document.getElementById(shoes_name_id).textContent;
+			real.push(shoes_name);
 			real.push(total_price);
 			
 			// POST 요청 설정
-			xhr.open("POST", "/AdminclothesInfoUpdateServlet", true);
+			xhr.open("POST", "/AdminShoesInfoUpdateServlet", true);
 			xhr.setRequestHeader("Content-Type", "application/json");
 			
 			xhr.addEventListener("load", function(){ 
@@ -532,18 +551,18 @@
 			linkId = element.getAttribute("data-link-id");
 			console.log(linkId);
 			
-			var name_id2 = "name" + linkId;
-			var name2 = document.getElementById(name_id2).textContent;
-			console.log(name2);
+			var shoes_name_id2 = "shoes_name" + linkId;
+			var shoes_name2 = document.getElementById(shoes_name_id2).textContent;
+			console.log(shoes_name2);
 			
 			
-			if(confirm(name2 + "를 정말 삭제 하시겠습니까 ?"))
+			if(confirm(shoes_name2 + "를 정말 삭제 하시겠습니까 ?"))
 			{
 				showDeleteToast("삭제 되었습니다.");
 				
 				// POST 요청 설정
 				xhr2.open("POST", "/ShoesDeleteServlet", true);
-				xhr2.send(name2);
+				xhr2.send(shoes_name2);
 				
 			} else {
 				location.reload();

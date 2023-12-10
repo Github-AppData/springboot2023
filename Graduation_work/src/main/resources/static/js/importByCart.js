@@ -1,19 +1,19 @@
 
-    const userCode = "imp62443371";
+    const userCode = "imp62443370";
     IMP.init(userCode);
     function requestPay(){
-                  var name = document.getElementById("name").textContent;
-                  var price = parseInt(document.getElementById("total_cost").textContent);
-                  console.log("name : ", name);
-                    console.log("price : ", price);
-                  console.log(name);
+                //class가 btn_payment인 태그를 선택했을 때 작동한다.       
+                  var shoesPriceElement = document.getElementById("total_cost");
+                  var shoes_name = document.getElementById("name").textContent;
+                  var shoesPrice = parseFloat(shoesPriceElement.textContent.replace("원", "").replace(",", ""));
+                  console.log(shoes_name);
                     //결제시 전달되는 정보
                   IMP.request_pay({
                               pg : 'html5_inicis', 
                               pay_method : 'card',
                               merchant_uid : 'merchant_' + new Date().getTime(),
-                              name : "asdads"/*상품명*/,
-                              amount : price/*상품 가격*/,
+                              name : shoes_name/*상품명*/,
+                              amount : shoesPrice/*상품 가격*/, 
                               buyer_email : 'dlfheks@naver.com'/*구매자 이메일*/,
                               buyer_name : '테스터',
                               buyer_tel : '010-3061-3357'/*구매자 연락처*/,
@@ -35,6 +35,7 @@
                               }
                               alert(msg);
                           });
+                           
                       }
     
     function requestPay2() {
@@ -59,16 +60,16 @@
 		for(var i = 0; i < objLength; i++)
 		{
 			var quan = document.getElementById("quantity" + i).value;
-			var size2 = object[i].size;
-			var name2 = object[i].name;
+			var shoes_size2 = object[i].size;
+			var shoes_name2 = object[i].shoes_name;
 			var final_price2 = object[i].final_price;
 			
 			var real_price = final_price2 * quan;
 			
 			 var newObject2 = {
-		        name: name2,
-		        quantity: quan,
-		        size: size2,
+		        shoes_name: shoes_name2,
+		        shoes_quantity: quan,
+		        size: shoes_size2,
 		        final_price: real_price,
 		        way: "KaKao"
 		    };
